@@ -1,59 +1,76 @@
+@extends('client.partials.main')
+
+@section('content')
+
 <x-guest-layout>
     <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
+        <div class="d-flex align-items-center mb-3 pb-1">
+            <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
+            <span class="h1 fw-bold mb-0">Logo</span>
+          </div>
+
+          <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Créer un compte</h5>
+
+                  
+        <!-- Session Status -->
+        <x-auth-session-status class="mb-4" :status="session('status')" />
 
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('register') }}">
+        <form method="POST" action="{{ route('register') }}"">
             @csrf
 
-            <!-- Name -->
-            <div>
-                <x-label for="name" :value="__('Name')" />
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form2Example17">Type de compte</label>
+            <select class="form-control form-control-lg" name="type">
+                <option value="client">Client</option>
+                <option value="owner">Bayeur</option>
+            </select>
+            {{-- <input type="email" id="form2Example17" class="form-control form-control-lg" /> --}}
+          </div>
 
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
-            </div>
+          <div class="form-outline mb-4">
+            <x-label for="name" :value="__('Nom')" />
 
-            <!-- Email Address -->
-            <div class="mt-4">
-                <x-label for="email" :value="__('Email')" />
+                <x-input id="name" class="form-control form-control-lg" type="text" name="name" :value="old('name')" required autofocus />
+          </div>
 
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
-            </div>
+          <div class="form-outline mb-4">
+            <x-label for="email" :value="__('Email')" />
 
-            <!-- Password -->
-            <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
+                <x-input id="email" class="form-control form-control-lg" type="email" name="email" :value="old('email')" required />
+          </div>
 
-                <x-input id="password" class="block mt-1 w-full"
+          <div class="form-outline mb-4">
+            <x-label for="password" :value="__('Mot de passe')" />
+
+                <x-input id="password" class="form-control form-control-lg"
                                 type="password"
                                 name="password"
                                 required autocomplete="new-password" />
-            </div>
+          </div>
 
-            <!-- Confirm Password -->
-            <div class="mt-4">
-                <x-label for="password_confirmation" :value="__('Confirm Password')" />
+          <div class="form-outline mb-4">
+            <x-label for="password_confirmation" :value="__('Comfirmer le Mot de passe')" />
 
-                <x-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required />
-            </div>
+            <x-input id="password_confirmation" class="form-control form-control-lg"
+                            type="password"
+                            name="password_confirmation" required />
+          </div>
 
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
+          <div class="pt-1 mb-4">
+            <x-button>
+                {{ __('Créer mon compte') }}
+            </x-button>
+          </div>
 
-                <x-button class="ml-4">
-                    {{ __('Register') }}
-                </x-button>
-            </div>
+          <p class="mb-5 pb-lg-2" style="color: #393f81;">Déjà un compte ? <a href="{{ route('login') }}"
+              style="color: #393f81;">Se connecter</a></p>
+          <a href="#!" class="small text-muted">Termes et usages.</a>
+          <a href="#!" class="small text-muted">Politique de confidentialité</a>
         </form>
     </x-auth-card>
 </x-guest-layout>
+
+@endsection

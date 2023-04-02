@@ -1,9 +1,21 @@
-<div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-    <div>
-        {{ $logo }}
-    </div>
-
-    <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+<div class="container py-5 h-100">
+    
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-xl-10">
+            <div class="card" style="border-radius: 1rem;">
+              <div class="row g-0">
+                <div class="col-md-6 col-lg-5 d-none d-md-block">
+                  <img src="{{ asset('assets/img/login-1.jpg')}}"
+                    alt="login form" class="img-fluid"  style="border-radius: 1rem 0 0 1rem; height: 100%" />
+                </div>
+                <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                  <div class="card-body p-4 p-lg-5 text-black">
         {{ $slot }}
+
+    </div>
+</div>
+</div>
+</div>
+</div>
     </div>
 </div>
