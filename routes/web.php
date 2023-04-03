@@ -16,7 +16,7 @@ use App\Http\Controllers\HomeController;
 Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('dashboard.dashboard');
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/contact', [HomeController::class, 'contact']);
