@@ -16,6 +16,7 @@ class CreateLodgmentsTable extends Migration
         Schema::create('lodgments', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('slug')->default('');
             $table->integer('price');
             $table->integer('stars');
             $table->string('description');

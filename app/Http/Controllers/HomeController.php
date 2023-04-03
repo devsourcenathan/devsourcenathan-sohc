@@ -13,10 +13,11 @@ class HomeController extends Controller
     }
     public function index()
     {
+        $lodgment = Lodgment::where('id', 1)->first();
         $lodgment_number = Lodgment::all()->count();
 
         $users_number = User::all()->count();
-        return view('client.pages.index', compact('lodgment_number', 'users_number'));
+        return view('client.pages.index', compact('lodgment_number', 'users_number', 'lodgment'));
     }
 
     public function contact()
@@ -40,5 +41,12 @@ class HomeController extends Controller
     public function service()
     {
         return view('client.pages.service');
+    }
+
+    public function details($slug)
+    {
+        $lodgment = Lodgment::where('slug', $slug)->first();
+
+        return view('client.pages.lodgment.details', compact('lodgment'));
     }
 }

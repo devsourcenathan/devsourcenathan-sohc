@@ -25,5 +25,6 @@ Route::get('/about', [HomeController::class, 'about']);
 Route::get('/service', [HomeController::class, 'service']);
 
 Route::get('/lodgment', [HomeController::class, 'lodgment']);
+Route::get('/lodgment/{slug}', [HomeController::class, 'details']);
 
 require __DIR__ . '/auth.php';

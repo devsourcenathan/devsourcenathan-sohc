@@ -1,5 +1,6 @@
 @extends('client.partials.main')
 @section('content')
+
 <!-- Carousel Start -->
 <div class="container-fluid p-0 mb-5">
     <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
@@ -146,7 +147,7 @@
                             lorem sed diam stet diam sed stet lorem.
                         </p>
                         <div class="d-flex justify-content-between">
-                            <a class="btn btn-sm btn-primary rounded py-2 px-4" href="">View Detail</a>
+                            <a class="btn btn-sm btn-primary rounded py-2 px-4" href="{{"lodgment/$lodgment->slug"}}">View Detail</a>
                             <a class="btn btn-sm btn-dark rounded py-2 px-4" href="">Book Now</a>
                         </div>
                     </div>
