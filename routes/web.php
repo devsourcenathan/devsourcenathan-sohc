@@ -30,6 +30,8 @@ Route::post('/configs/store', [ConfigController::class, 'store']);
 
 // Lodgment routes
 Route::get('/lodgments', [LodgmentController::class, 'index']);
+Route::get('/lodgments/store', [LodgmentController::class, 'store']);
+
 Route::get('/requests', [LodgmentController::class, 'requests']);
 
 // Reservation routes
