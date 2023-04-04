@@ -1,3 +1,11 @@
+<?php 
+
+use App\Models\Config;
+
+$config = Config::all()->last();
+
+?>
+
 <!-- Footer Start -->
 <div class="container-fluid bg-dark text-light mt-5 footer wow fadeIn" data-wow-delay="0.1s">
     <div class="container pb-5">
@@ -7,13 +15,13 @@
                     Contact
                 </h6>
                 <p class="mb-2">
-                    <i class="fa fa-map-marker-alt me-3"></i>Bafoussam, Cameroun
+                    <i class="fa fa-map-marker-alt me-3"></i>{{ $config->location}}
                 </p>
                 <p class="mb-2">
-                    <i class="fa fa-phone-alt me-3"></i>6 56 29 69 92
+                    <i class="fa fa-phone-alt me-3"></i>{{ $config->phone}}
                 </p>
                 <p class="mb-2">
-                    <i class="fa fa-envelope me-3"></i>info@sohc.com
+                    <i class="fa fa-envelope me-3"></i>{{ $config->contact_email}}
                 </p>
             </div>
             <div class="col-lg-5 col-md-12">
@@ -28,16 +36,6 @@
                         <a class="btn btn-link" href="/conditions">Termes & Condition</a>
                         <a class="btn btn-link" href="/support">Support</a>
                     </div>
-                    {{-- <div class="col-md-6">
-                        <h6 class="section-title text-start text-primary text-uppercase mb-4">
-                            Services
-                        </h6>
-                        <a class="btn btn-link" href="">Food & Restaurant</a>
-                        <a class="btn btn-link" href="">Spa & Fitness</a>
-                        <a class="btn btn-link" href="">Sports & Gaming</a>
-                        <a class="btn btn-link" href="">Event & Party</a>
-                        <a class="btn btn-link" href="">GYM & Yoga</a>
-                    </div> --}}
                 </div>
             </div>
         </div>

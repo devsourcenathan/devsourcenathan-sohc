@@ -157,12 +157,12 @@
             <path d="M8.793 2a1 1 0 0 1 1.414 0L12 3.793V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v3.293l1.854 1.853a.5.5 0 0 1-.708.708L15 8.207V13.5a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 4 13.5V8.207l-.146.147a.5.5 0 1 1-.708-.708L8.793 2Z"/>
           </svg>
         </i>
-          <span>Retour sur le site</span>
+          <span>Retourner sur le site</span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link " href="/dashboard">
+        <a class="nav-link collapsed" href="/dashboard">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -176,12 +176,12 @@
           </a>
           <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
             <li>
-              <a href="components-alerts.html">
+              <a href="/lodgments">
                 <i class="bi bi-circle"></i><span>Liste des logements</span>
               </a>
             </li>
             <li>
-              <a href="components-accordion.html">
+              <a href="/requests">
                 <i class="bi bi-circle"></i><span>Liste des demandes</span>
               </a>
             </li>
@@ -190,17 +190,10 @@
         </li><!-- End Components Nav -->
 
         <li class="nav-item">
-          <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-            <i class="bi bi-journal-text"></i><span>Reservations</span><i class="bi bi-chevron-down ms-auto"></i>
+          <a class="nav-link collapsed" href="/reservations">
+            <i class="bi bi-journal-text"></i>
+            <span>Reservations</span>
           </a>
-          <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-            <li>
-              <a href="forms-elements.html">
-                <i class="bi bi-circle"></i><span>Liste des Reservations</span>
-              </a>
-            </li>
-            
-          </ul>
         </li><!-- End Forms Nav -->
 
         <li class="nav-item">
@@ -213,12 +206,12 @@
           </a>
           <ul id="params-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
             <li>
-              <a href="tables-general.html">
+              <a href="/cities">
                 <i class="bi bi-circle"></i><span>Villes</span>
               </a>
             </li>
             <li>
-              <a href="tables-data.html">
+              <a href="/types">
                 <i class="bi bi-circle"></i><span>Type de logements</span>
               </a>
             </li>
@@ -254,7 +247,7 @@
         </li><!-- End Tables Nav -->
 
         <li class="nav-item">
-          <a class="nav-link collapsed" href="pages-blank.html">
+          <a class="nav-link collapsed" href="/configs">
             <i class="bi bi-gear"></i>
             <span>Parametres du site</span>
           </a>
@@ -312,3 +305,4 @@
     </ul>
 
   </aside><!-- End Sidebar-->
+

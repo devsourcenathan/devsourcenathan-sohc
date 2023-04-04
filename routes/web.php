@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ConfigController;
+use App\Http\Controllers\LodgmentController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +21,29 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/dashboard', function () {
     return view('dashboard.dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+// ---  Start dashboard route
+
+// Configs routes
+Route::get('/configs', [ConfigController::class, 'index']);
+Route::post('/configs/store', [ConfigController::class, 'store']);
+
+// Lodgment routes
+Route::get('/lodgments', [LodgmentController::class, 'index']);
+Route::get('/requests', [LodgmentController::class, 'requests']);
+
+// Reservation routes
+Route::get('/reservations', [LodgmentController::class, 'reservations']);
+
+// Params routes
+Route::get('/cities', [LodgmentController::class, 'cities']);
+Route::get('/types', [LodgmentController::class, 'types']);
+
+
+// --- End dashboard routes
+
+
+// Website routes
 
 Route::get('/contact', [HomeController::class, 'contact']);
 

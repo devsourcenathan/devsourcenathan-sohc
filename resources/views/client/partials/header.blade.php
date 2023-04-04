@@ -1,3 +1,11 @@
+<?php 
+
+use App\Models\Config;
+
+$config = Config::all()->last();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,11 +60,11 @@
                         <div class="col-lg-7 px-5 text-start">
                             <div class="h-100 d-inline-flex align-items-center py-2 me-4">
                                 <i class="fa fa-envelope text-primary me-2"></i>
-                                <p class="mb-0">info@sohc.com</p>
+                                <p class="mb-0">{{ $config->contact_email}}</p>
                             </div>
                             <div class="h-100 d-inline-flex align-items-center py-2">
                                 <i class="fa fa-phone-alt text-primary me-2"></i>
-                                <p class="mb-0">6 56 29 69 92</p>
+                                <p class="mb-0">{{ $config->phone}}</p>
                             </div>
                         </div>
                         <div class="col-lg-5 px-5 text-end">

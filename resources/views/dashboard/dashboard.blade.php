@@ -1,2 +1,1 @@
 @extends('dashboard.partials.main')
-
