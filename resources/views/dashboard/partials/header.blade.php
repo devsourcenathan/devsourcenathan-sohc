@@ -271,14 +271,14 @@ function collapsed($name){
 
       @if (Auth::user()->type == 'bayeur')
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-blank.html">
+        <a class="nav-link collapsed" href="/lessor/requests">
           <i class="bi bi-journal-text"></i>
           <span>Mes demandes</span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-blank.html">
+        <a class="nav-link collapsed" href="lessor.lodgment">
           <i class="bi bi-menu-button-wide"></i>
           <span>Mes logements</span>
         </a>

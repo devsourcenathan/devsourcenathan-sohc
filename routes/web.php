@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ConfigController;
+use App\Http\Controllers\LessorController;
 use App\Http\Controllers\LodgmentController;
 use App\Http\Controllers\ParamController;
 
@@ -57,6 +58,13 @@ Route::get('/towns/store', [ParamController::class, 'create_town']);
 Route::post('/cities/store', [ParamController::class, 'store_city']);
 Route::post('/types/store', [ParamController::class, 'store_type']);
 Route::post('/towns/store', [ParamController::class, 'store_town']);
+
+// Lessor Routes
+
+Route::prefix('lessor')->group(function () {
+    Route::get('/requests', [LessorController::class, 'requests'])->name('requests');
+    Route::get('/lodgment', [LessorController::class, 'lodgment'])->name('lodgment');
+});
 
 
 // --- End dashboard routes

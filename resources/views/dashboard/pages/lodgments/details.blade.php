@@ -64,7 +64,7 @@
 
                 <h5 class="card-title">Actions</h5>
 
-                @if ($lodgment->state)
+                @if ($lodgment->state == 0)
                     
                 <a href="publish/{{$lodgment->slug}}" type="button" class="btn btn-success rounded-pill">Publier</a>
                 @else

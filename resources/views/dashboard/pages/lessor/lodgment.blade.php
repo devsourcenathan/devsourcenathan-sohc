@@ -3,8 +3,7 @@
 @section('content')
 <div class="card">
     <div class="card-body">
-      <h5 class="card-title">Liste des logements</h5>
-      <a href="/lodgments/create"  class="btn btn-primary">Ajouter un logement</a>
+      <h5 class="card-title">Liste des demande</h5>
       <table class="table" id="table">
         <thead>
             <tr>
@@ -27,21 +26,15 @@
                 <td>{{$lodgment->description}}</td>
                 <td>{{$lodgment->price}}</td>
                 <td>{{$lodgment->location}}</td>
-                <td>{{$lodgment->state == 1 ? "En ligne" : "Pas en ligne"}}</td>
+                <td>{{$lodgment->state ? "En ligne" : "Pas en ligne"}}</td>
                 <td>
-                    @if ($lodgment->state == 0)
-                    <a href="publish/{{$lodgment->slug}}" type="button" class="badge rounded-pill bg-success cursor-pointer">Publier</a>
-                    @else
-                    <a href="unpublish/{{$lodgment->slug}}" type="button" class="badge rounded-pill bg-warning cursor-pointer">Masquer</a>
-                        
-                    @endif
-                    
+                    <a href="lodgments/publish/{{$lodgment->slug}}" class="badge rounded-pill bg-success cursor-pointer" style="cursor: pointer;">Publier</a>
                     <a href="lodgments/details/{{$lodgment->slug}}" class="badge rounded-pill bg-info cursor-pointer" style="cursor: pointer;">Afficher</a>
-                </td> 
+                </td>
             </tr>
             @empty
                 <tr>
-                    <td colspan="7">Pas de logments !</td>
+                    <td colspan="7">Pas de demandes !</td>
                 </tr>
             @endforelse ($lodgments as $lodgment)
                 

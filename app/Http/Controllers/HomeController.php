@@ -17,10 +17,11 @@ class HomeController extends Controller
     public function index()
     {
         $lodgment = Lodgment::where('id', 1)->first();
+        $lodgments = Lodgment::where('state', 1)->get();
         $lodgment_number = Lodgment::all()->count();
 
         $users_number = User::all()->count();
-        return view('client.pages.index', compact('lodgment_number', 'users_number', 'lodgment'));
+        return view('client.pages.index', compact('lodgment_number', 'users_number', 'lodgment', 'lodgments'));
     }
 
     public function contact()
