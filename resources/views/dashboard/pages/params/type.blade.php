@@ -4,26 +4,24 @@
 <div class="card">
     <div class="card-body">
       <h5 class="card-title">Liste des type de logements</h5>
-
+      <a href="/types/store"  class="btn btn-primary">Ajouter un type de logement</a>
       <table class="table" id="table">
         <thead>
             <tr>
                 <th>Nom</th>
-                <th>Prenom</th>
-                <th>Adresse</th>
-                <th>Telephone</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                    </td>
-                </tr>
+            @forelse ($types as $type)
+            <tr>
+               <td>{{$type->name}}</td>
+               <td></td>
+           @empty
+                 <td>Pas de type pour le moment !</td>
+           </tr>
+           @endforelse
+                    
 
         </tbody>
     </table>

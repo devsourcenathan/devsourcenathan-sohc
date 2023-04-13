@@ -3,8 +3,8 @@
 @section('content')
 <div class="card">
     <div class="card-body">
-      <h5 class="card-title">Liste des villes</h5>
-      <a href="/cities/store"  class="btn btn-primary">Ajouter une ville</a>
+      <h5 class="card-title">Liste des quartiers</h5>
+      <a href="/towns/store"  class="btn btn-primary">Ajouter un quartier</a>
       <table class="table" id="table">
         <thead>
             <tr>
@@ -13,16 +13,16 @@
             </tr>
         </thead>
         <tbody>
-            @forelse ($cities as $city)
+            @forelse ($towns as $town)
             <tr>
                     <td>
-                        {{ $city->name}}
+                        {{ $town->name}}
                     </td>
                     <td>
                     </td>
                     @empty
                     <td colspan="2">
-                        Pas de ville pour le moment !
+                        Pas de quartier pour le moment !
                     </td>
                 </tr>
                     @endforelse

@@ -24,19 +24,37 @@
                     <div class="row g-2">
                         <div class="col-md-10">
                             <div class="row g-2">
-                                <div class="col-md-4">
-                                    <input type="text" class="form-control" placeholder="Ville"/>
+                                <div class="col-md-3">
+                                    <select name="city" id="city" class="form-control" required>
+                                        <option value="all" disabled selected>Ville</option>
+                                        @forelse ($cities as $city)
+                                          <option value="{{ $city->name}}">{{ $city->name}}</option>
+                                        @empty
+                                        <option value="null">Pas de ville disponible</option>
+                                        @endforelse
+                                        </select>
                                 </div>
-                                <div class="col-md-4">
-                                    <select class="form-select">
-                                        <option selected>Type</option>
-                                        <option value="apartment">Appartement</option>
-                                        <option value="house">Maison</option>
-                                        <option value="studio">Studio</option>
-                                        <option value="room">Chambre</option>
-                                    </select>
+                                <div class="col-md-3">
+                                    <select name="town" id="town" class="form-control" required>
+                                        <option value="all" disabled selected>Quartier</option>
+                                        @forelse ($towns as $town)
+                                          <option value="{{ $town->name}}">{{ $town->name}}</option>
+                                        @empty
+                                        <option value="null">Pas de quartier disponible</option>
+                                        @endforelse
+                                        </select>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
+                                    <select name="type" id="type" class="form-control" required>
+                                        <option value="all" disabled selected>Type</option>
+                                        @forelse ($types as $type)
+                                          <option value="{{ $type->name}}">{{ $type->name}}</option>
+                                        @empty
+                                        <option value="null">Pas de type disponible</option>
+                                        @endforelse
+                                        </select>
+                                </div>
+                                <div class="col-md-3">
                                     <select class="form-select">
                                         <option selected>Etoile</option>
                                         <option value="1">1</option>

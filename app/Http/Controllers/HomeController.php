@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\City;
 use App\Models\Lodgment;
+use App\Models\LodgmentType;
+use App\Models\Town;
 use App\Models\User;
 
 class HomeController extends Controller
@@ -35,7 +38,10 @@ class HomeController extends Controller
 
     public function lodgment()
     {
-        return view('client.pages.lodgment');
+        $types = LodgmentType::all();
+        $cities = City::all();
+        $towns = Town::all();
+        return view('client.pages.lodgment', compact('types', 'cities', 'towns'));
     }
 
     public function service()

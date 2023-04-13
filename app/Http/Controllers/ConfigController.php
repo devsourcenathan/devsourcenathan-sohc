@@ -20,7 +20,7 @@ class ConfigController extends Controller
     public function store(Request $request)
     {
 
-        $configs = new Config();
+        $configs = Config::find(1);
 
         $configs->phone = $request->phone;
         $configs->contact_email = $request->contact_email;
@@ -28,7 +28,7 @@ class ConfigController extends Controller
         $configs->tech_email = $request->tech_email;
         $configs->location = $request->location;
 
-        $configs->save();
+        $configs->update();
 
         return redirect('/configs');
     }

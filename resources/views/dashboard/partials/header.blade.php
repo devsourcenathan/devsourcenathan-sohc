@@ -1,3 +1,13 @@
+<?php 
+
+function collapsed($name){
+  if($name !== Route::currentRouteName()){
+    return "collapsed";
+  }
+  return "";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,14 +31,14 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
 
-
+  {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css"> --}}
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
  
   <link rel="stylesheet" href="{{ asset('utils/vendor/quill/quill.snow.css')}}" />
   <link rel="stylesheet" href="{{ asset('utils/vendor/quill/quill.bubble.css')}}" />
-  <link rel="stylesheet" href="{{ asset('utils/vendor/simple-datatables/style.css')}}" />
-
+  {{-- <link rel="stylesheet" href="{{ asset('utils/vendor/simple-datatables/style.css')}}" /> --}}
+  {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css"> --}}
   <link rel="stylesheet" href="{{ asset('utils//css/style.css')}}" />
 
 
@@ -150,7 +160,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="/">
+        <a class="nav-link <?php echo(collapsed("/")) ?>" href="/">
           <i>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-houses-fill" viewBox="0 0 16 16">
             <path d="M7.207 1a1 1 0 0 0-1.414 0L.146 6.646a.5.5 0 0 0 .708.708L1 7.207V12.5A1.5 1.5 0 0 0 2.5 14h.55a2.51 2.51 0 0 1-.05-.5V9.415a1.5 1.5 0 0 1-.56-2.475l5.353-5.354L7.207 1Z"/>
@@ -162,7 +172,7 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="/dashboard">
+        <a class="nav-link <?php echo(collapsed("dashboard")) ?> " href="/dashboard">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -174,7 +184,7 @@
           <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
             <i class="bi bi-menu-button-wide"></i><span>Logements</span><i class="bi bi-chevron-down ms-auto"></i>
           </a>
-          <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
             <li>
               <a href="/lodgments">
                 <i class="bi bi-circle"></i><span>Liste des logements</span>
@@ -208,6 +218,11 @@
             <li>
               <a href="/cities">
                 <i class="bi bi-circle"></i><span>Villes</span>
+              </a>
+            </li>
+            <li>
+              <a href="/towns">
+                <i class="bi bi-circle"></i><span>Quartiers</span>
               </a>
             </li>
             <li>

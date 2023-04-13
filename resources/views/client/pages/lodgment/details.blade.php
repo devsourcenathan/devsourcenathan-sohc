@@ -46,7 +46,15 @@
                                     </div>
                                 </div>
                             </div>
-                            <a class="btn btn-primary py-3 px-5 mt-2" href="">Reserver maintenant </a>
+                            @guest
+                            <a class="btn btn-primary py-3 px-5 mt-2" href="/login">Reserver maintenant </a>
+                            @endguest
+                            
+                            @auth
+                            <a class="btn btn-primary py-3 px-5 mt-2" href="#">Reserver maintenant </a>
+                            @endauth
+                            
+                           
                         </div>
                         <div class="col-lg-6">
                             <div class="row g-3">

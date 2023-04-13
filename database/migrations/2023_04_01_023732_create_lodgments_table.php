@@ -22,7 +22,10 @@ class CreateLodgmentsTable extends Migration
             $table->string('description');
             $table->text('details');
             $table->integer('pieces');
+            $table->string('type');
+            $table->string('location');
             $table->text('img_path');
+            $table->boolean('state')->default(false);
             $table->integer('user_id');
             $table->timestamps();
         });
