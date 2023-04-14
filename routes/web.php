@@ -56,6 +56,10 @@ Route::prefix('dashboard')->group(function () {
 
 
     Route::get('/reservations', [CustomerController::class, 'reservations']);
+
+
+
+    Route::get('/profile', [UserController::class, 'profile']);
 });
 
 
@@ -104,6 +108,9 @@ Route::get('/about', [HomeController::class, 'about']);
 Route::get('/service', [HomeController::class, 'service']);
 
 Route::get('/lodgment', [HomeController::class, 'lodgment']);
+Route::get('/search', [HomeController::class, 'search']);
+
+
 Route::get('/lodgment/{slug}/{id}', [HomeController::class, 'details']);
 
 require __DIR__ . '/auth.php';

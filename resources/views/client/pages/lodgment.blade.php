@@ -20,57 +20,61 @@
                     <!-- Booking Start -->
         <div class="container-fluid booking pb-5 wow fadeIn" data-wow-delay="0.1s">
             <div class="container">
-                <div class="bg-white shadow" style="padding: 35px;">
-                    <div class="row g-2">
-                        <div class="col-md-10">
-                            <div class="row g-2">
-                                <div class="col-md-3">
-                                    <select name="city" id="city" class="form-control" required>
-                                        <option value="all" disabled selected>Ville</option>
-                                        @forelse ($cities as $city)
-                                          <option value="{{ $city->name}}">{{ $city->name}}</option>
-                                        @empty
-                                        <option value="null">Pas de ville disponible</option>
-                                        @endforelse
+                <form action="/search">
+                    @csrf
+                    @method('get')
+                    <div class="bg-white shadow" style="padding: 35px;">
+                        <div class="row g-2">
+                            <div class="col-md-10">
+                                <div class="row g-2">
+                                    <div class="col-md-3">
+                                        <select name="city" id="city" class="form-control" required>
+                                            <option value="all" disabled selected>Ville</option>
+                                            @forelse ($cities as $city)
+                                            <option value="{{ $city->name}}">{{ $city->name}}</option>
+                                            @empty
+                                            <option value="null">Pas de ville disponible</option>
+                                            @endforelse
+                                            </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <select name="town" id="town" class="form-control" required>
+                                            <option value="all" disabled selected>Quartier</option>
+                                            @forelse ($towns as $town)
+                                            <option value="{{ $town->name}}">{{ $town->name}}</option>
+                                            @empty
+                                            <option value="null">Pas de quartier disponible</option>
+                                            @endforelse
+                                            </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <select name="type" id="type" class="form-control" required>
+                                            <option value="all" disabled selected>Type</option>
+                                            @forelse ($types as $type)
+                                            <option value="{{ $type->name}}">{{ $type->name}}</option>
+                                            @empty
+                                            <option value="null">Pas de type disponible</option>
+                                            @endforelse
+                                            </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <select class="form-select" name="stars">
+                                            <option selected>Etoile</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
                                         </select>
-                                </div>
-                                <div class="col-md-3">
-                                    <select name="town" id="town" class="form-control" required>
-                                        <option value="all" disabled selected>Quartier</option>
-                                        @forelse ($towns as $town)
-                                          <option value="{{ $town->name}}">{{ $town->name}}</option>
-                                        @empty
-                                        <option value="null">Pas de quartier disponible</option>
-                                        @endforelse
-                                        </select>
-                                </div>
-                                <div class="col-md-3">
-                                    <select name="type" id="type" class="form-control" required>
-                                        <option value="all" disabled selected>Type</option>
-                                        @forelse ($types as $type)
-                                          <option value="{{ $type->name}}">{{ $type->name}}</option>
-                                        @empty
-                                        <option value="null">Pas de type disponible</option>
-                                        @endforelse
-                                        </select>
-                                </div>
-                                <div class="col-md-3">
-                                    <select class="form-select">
-                                        <option selected>Etoile</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                    </select>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-2">
-                            <button class="btn btn-primary w-100">Rechercher</button>
+                            <div class="col-md-2">
+                                <input type="submit" class="btn btn-primary w-100">Rechercher</input>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
         <!-- Booking End -->
