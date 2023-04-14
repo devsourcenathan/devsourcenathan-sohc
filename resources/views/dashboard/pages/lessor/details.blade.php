@@ -29,32 +29,14 @@
 
                 <div class="row">
                   <div class="col-lg-3 col-md-4 label">Type de logement</div>
+                  <div class="col-lg-9 col-md-8">{{$lodgment->type}}</div>
+                </div>
+                
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Ville</div>
                   <div class="col-lg-9 col-md-8">{{$lodgment->location}}</div>
                 </div>
 
-                <div class="row">
-                  <div class="col-lg-3 col-md-4 label">Ville</div>
-                  <div class="col-lg-9 col-md-8">{{$lodgment->type}}</div>
-                </div>
-
-
-                
-
-                <div class="row">
-                  <div class="col-lg-3 col-md-4 label">Etat</div>
-                  <div class="col-lg-9 col-md-8">{{$lodgment->stars}}</div>
-                </div>
-
-                <div class="row">
-                  <div class="col-lg-3 col-md-4 label">Proprietaire</div>
-                  <div class="col-lg-9 col-md-8">
-                    @if ($lodgment->user->type === "admin")
-                        SOHC
-                    @else
-                    {{$lodgment->user->name}}
-                    @endif
-                  </div>
-                </div>
 
                 <h5 class="card-title">Details</h5>
                 <p class="small fst-italic">
@@ -64,14 +46,14 @@
 
                 <h5 class="card-title">Actions</h5>
 
-                @if ($lodgment->state == 0)
+                @if ($lodgment->state == 3)
                     
-                <a href="publish/{{$lodgment->slug}}" type="button" class="btn btn-success rounded-pill">Publier</a>
+                <a href={{"/lessor/propose/cancel/$lodgment->slug/$lodgment->id"}} type="button" class="btn btn-danger rounded-pill">Annuler</a>
                 @elseif($lodgment->state == 1)
-                <a href="unpublish/{{$lodgment->slug}}" type="button" class="btn btn-primary rounded-pill">Masquer</a>
-                @elseif($lodgment->state == 3)
-                <a href="reject/{{$lodgment->slug}}" type="button" class="btn btn-danger rounded-pill">Rejeter</a>
-                <a href="publish/{{$lodgment->slug}}" type="button" class="btn btn-success rounded-pill">Approuver</a>
+                <a href={{"/lessor/propose/unpublish/$lodgment->slug/$lodgment->id}"}} type="button" class="btn btn-primary rounded-pill">Masquer</a>
+                @else
+                
+                <a href={{"/lessor/propose/publish/$lodgment->slug/$lodgment->id" }}type="button" class="btn btn-success rounded-pill">Publier</a>
                 @endif
                 {{-- <button type="button" class="btn btn-danger rounded-pill">Supprimer</button> --}}
             

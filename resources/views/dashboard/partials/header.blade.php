@@ -244,17 +244,17 @@ function collapsed($name){
           </a>
           <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
             <li>
-              <a href="tables-general.html">
+              <a href="/dashboard/customers">
                 <i class="bi bi-circle"></i><span>Clients</span>
               </a>
             </li>
             <li>
-              <a href="tables-data.html">
+              <a href="/dashboard/lessors">
                 <i class="bi bi-circle"></i><span>Bayeurs</span>
               </a>
             </li>
             <li>
-              <a href="tables-data.html">
+              <a href="/dashboard/users">
                 <i class="bi bi-circle"></i><span>Administrateurs</span>
               </a>
             </li>
@@ -269,7 +269,7 @@ function collapsed($name){
         </li>
       @endif
 
-      @if (Auth::user()->type == 'bayeur')
+      @if (Auth::user()->type == 'lessor')
       <li class="nav-item">
         <a class="nav-link collapsed" href="/lessor/requests">
           <i class="bi bi-journal-text"></i>
@@ -278,7 +278,7 @@ function collapsed($name){
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="lessor.lodgment">
+        <a class="nav-link collapsed" href="/lessor/lodgment">
           <i class="bi bi-menu-button-wide"></i>
           <span>Mes logements</span>
         </a>
@@ -294,16 +294,9 @@ function collapsed($name){
 
       @if (Auth::user()->type == 'client')
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-blank.html">
+        <a class="nav-link collapsed" href="/dashboard/reservations">
           <i class="bi bi-journal-text"></i>
           <span>Mes Reservations</span>
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-blank.html">
-          <i class="bi bi-menu-button-wide"></i>
-          <span>Mes Demandes</span>
         </a>
       </li>
 

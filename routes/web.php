@@ -3,9 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ConfigController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\LessorController;
 use App\Http\Controllers\LodgmentController;
 use App\Http\Controllers\ParamController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +38,25 @@ Route::get('/lodgments/create', [LodgmentController::class, 'create']);
 Route::get('/lodgments/details/{lodgment:slug}', [LodgmentController::class, 'show']);
 Route::get('/lodgments/details/publish/{lodgment:slug}', [LodgmentController::class, 'publish']);
 Route::get('/lodgments/details/unpublish/{lodgment:slug}', [LodgmentController::class, 'unpublish']);
+Route::get('/lodgments/details/reject/{lodgment:slug}', [LodgmentController::class, 'reject']);
 
+
+Route::prefix('dashboard')->group(function () {
+    Route::get('/customers', [UserController::class, 'customers']);
+    Route::get('/customers/details/{id}', [UserController::class, 'customer_details']);
+
+
+    Route::get('/lessors', [UserController::class, 'lessors']);
+    Route::get('/lessors/details/{id}', [UserController::class, 'lessor_details']);
+
+
+    Route::get('/users', [UserController::class, 'users']);
+    Route::get('/users/details/{id}', [UserController::class, 'user_details']);
+
+
+
+    Route::get('/reservations', [CustomerController::class, 'reservations']);
+});
 
 
 Route::post('/lodgments/store', [LodgmentController::class, 'store']);
@@ -64,6 +84,12 @@ Route::post('/towns/store', [ParamController::class, 'store_town']);
 Route::prefix('lessor')->group(function () {
     Route::get('/requests', [LessorController::class, 'requests'])->name('requests');
     Route::get('/lodgment', [LessorController::class, 'lodgment'])->name('lodgment');
+    Route::get('/propose', [LessorController::class, 'propose'])->name('propose');
+    Route::post('/propose/store', [LessorController::class, 'store']);
+    Route::get('/propose/details/{slug}/{id}', [LessorController::class, 'details']);
+    Route::get('/propose/publish/{slug}/{id}', [LessorController::class, 'publish']);
+    Route::get('/propose/unpublish/{slug}/{id}', [LessorController::class, 'unpublish']);
+    Route::get('/propose/cancel/{slug}/{id}', [LessorController::class, 'cancel']);
 });
 
 

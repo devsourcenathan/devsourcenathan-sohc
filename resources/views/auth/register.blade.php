@@ -25,7 +25,7 @@
             <label class="form-label" for="form2Example17">Type de compte</label>
             <select class="form-control form-control-lg" name="type">
                 <option value="client">Client</option>
-                <option value="owner">Bayeur</option>
+                <option value="lessor">Bayeur</option>
             </select>
             {{-- <input type="email" id="form2Example17" class="form-control form-control-lg" /> --}}
           </div>

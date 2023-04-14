@@ -24,6 +24,7 @@ class CreateLodgmentsTable extends Migration
             $table->integer('pieces');
             $table->string('type');
             $table->string('location');
+            $table->string('town')->nullable();
             $table->text('img_path');
             $table->boolean('state')->default(false);
             $table->integer('user_id');

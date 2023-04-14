@@ -4,7 +4,7 @@
 <div class="card">
     <div class="card-body">
       <h5 class="card-title">Mes demandes</h5>
-      <a href="/lessor/create"  class="btn btn-primary">Proposer un logement</a>
+      <a href="/lessor/propose"  class="btn btn-primary">Proposer un logement</a>
       <table class="table" id="table">
         <thead>
             <tr>
@@ -27,10 +27,15 @@
                 <td>{{$lodgment->description}}</td>
                 <td>{{$lodgment->price}}</td>
                 <td>{{$lodgment->location}}</td>
-                <td>{{$lodgment->state ? "En ligne" : "Pas en ligne"}}</td>
                 <td>
-                    <a href="lodgments/publish/{{$lodgment->slug}}" class="badge rounded-pill bg-success cursor-pointer" style="cursor: pointer;">Publier</a>
-                    <a href="lodgments/details/{{$lodgment->slug}}" class="badge rounded-pill bg-info cursor-pointer" style="cursor: pointer;">Afficher</a>
+                    @if($lodgment->state === 4)
+                        Rejeté
+                    @elseif($lodgment->state === 3)
+                        En attente
+                    @endif
+                </td>
+                <td>
+                    <a href={{"/lessor/propose/details/$lodgment->slug/$lodgment->id"}} class="badge rounded-pill bg-info cursor-pointer" style="cursor: pointer;">Afficher</a>
                 </td>
             </tr>
             @empty

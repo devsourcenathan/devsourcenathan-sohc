@@ -13,7 +13,9 @@ class LodgmentController extends Controller
 
     public function index()
     {
-        $lodgments = Lodgment::all();
+        $lodgments = Lodgment::where(function ($query) {
+            $query->where('state', 1)->orWhere('state', 0);
+        })->get();;
         return view('dashboard.pages.lodgments.index', compact('lodgments'));
     }
 
@@ -32,24 +34,29 @@ class LodgmentController extends Controller
     public function publish(Lodgment $lodgment)
     {
         $lodgment->state = 1;
+        $lodgment->save();
         return view('dashboard.pages.lodgments.details', compact('lodgment'));
     }
 
     public function unpublish(Lodgment $lodgment)
     {
         $lodgment->state = 0;
+        $lodgment->save();
         return view('dashboard.pages.lodgments.details', compact('lodgment'));
     }
 
     public function reject(Lodgment $lodgment)
     {
-        $lodgment->state = 3;
+        $lodgment->state = 4;
+        $lodgment->save();
         return view('dashboard.pages.lodgments.details', compact('lodgment'));
     }
 
     public function requests()
     {
-        $lodgments = Lodgment::where('state', 2)->get();
+        $lodgments = Lodgment::where(function ($query) {
+            $query->where('state', 3)->orWhere('state', 4);
+        })->get();;
         return view('dashboard.pages.requests.index', compact('lodgments'));
     }
 
