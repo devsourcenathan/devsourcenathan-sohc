@@ -23,29 +23,14 @@
                 <div class="container">
                     <div class="row g-5 align-items-center">
                         <div class="col-lg-6">
-                            <h6 class="section-title text-start text-primary text-uppercase">{{ $lodgment->title}}</h6>
-                            <h1 class="mb-4"><span class="text-primary text-uppercase">Online Housing Company</span></h1>
-                            <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
-                            <div class="row g-3 pb-4">
-                                <div class="col-sm-4 wow fadeIn" data-wow-delay="0.1s">
-                                    <div class="border rounded p-1">
-                                        <div class="border rounded text-center p-4">
-                                            <i class="fa fa-hotel fa-2x text-primary mb-2"></i>
-                                            {{-- <h2 class="mb-1" data-toggle="counter-up">{{ $lodgment_number }}</h2> --}}
-                                            <p class="mb-0">Logements</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 wow fadeIn" data-wow-delay="0.3s">
-                                    <div class="border rounded p-1">
-                                        <div class="border rounded text-center p-4">
-                                            <i class="fa fa-users-cog fa-2x text-primary mb-2"></i>
-                                            {{-- <h2 class="mb-1" data-toggle="counter-up">{{ $users_number }}</h2> --}}
-                                            <p class="mb-0">Utilisateurs</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <h1 class="mb-4"><span class="text-primary text-uppercase">{{ $lodgment->title}}</span></h1>
+
+                            <h6 class="section-title text-start text-primary text-uppercase">Description</h6>
+                            <p class="mb-4">{{ $lodgment->description}}</p>
+
+                            <h6 class="section-title text-start text-primary text-uppercase">Details</h6>
+                            <p class="mb-4">{{ $lodgment->details}}</p>
+                            
                             @guest
                             <a class="btn btn-primary py-3 px-5 mt-2" href="/login">Reserver maintenant </a>
                             @endguest

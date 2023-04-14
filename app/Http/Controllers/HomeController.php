@@ -16,12 +16,11 @@ class HomeController extends Controller
     }
     public function index()
     {
-        $lodgment = Lodgment::where('id', 1)->first();
-        $lodgments = Lodgment::where('state', 1)->get();
+        $lodgments = Lodgment::where('state', 1)->limit(6)->get();
         $lodgment_number = Lodgment::all()->count();
 
         $users_number = User::all()->count();
-        return view('client.pages.index', compact('lodgment_number', 'users_number', 'lodgment', 'lodgments'));
+        return view('client.pages.index', compact('lodgment_number', 'users_number', 'lodgments'));
     }
 
     public function contact()
@@ -42,7 +41,8 @@ class HomeController extends Controller
         $types = LodgmentType::all();
         $cities = City::all();
         $towns = Town::all();
-        return view('client.pages.lodgment', compact('types', 'cities', 'towns'));
+        $lodgments = Lodgment::where('state', 1)->get();
+        return view('client.pages.lodgment', compact('types', 'cities', 'towns', 'lodgments'));
     }
 
     public function service()
@@ -50,9 +50,9 @@ class HomeController extends Controller
         return view('client.pages.service');
     }
 
-    public function details($slug)
+    public function details($slug, $id)
     {
-        $lodgment = Lodgment::where('slug', $slug)->first();
+        $lodgment = Lodgment::where('id', $id)->first();
 
         return view('client.pages.lodgment.details', compact('lodgment'));
     }
