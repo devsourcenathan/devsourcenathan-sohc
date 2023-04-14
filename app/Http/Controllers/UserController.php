@@ -55,8 +55,13 @@ class UserController extends Controller
         $user = User::find($id);
 
         $lodgments = $lodgments = Lodgment::where("user_id", $user->id)->where(function ($query) {
-            $query->where('state', 1)->orWhere('state', 0);
+            $query->where('state', 1)->orWhere('state', 1);
         })->get();
         return view('dashboard.pages.users.details', compact('user', 'lodgments'));
+    }
+
+    public function profile()
+    {
+        return view('dashboard.pages.profile');
     }
 }
