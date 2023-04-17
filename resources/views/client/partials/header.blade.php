@@ -97,7 +97,7 @@ $config = Config::all()->last();
                                 @endguest
 
                                 @auth
-                                <a class="nav-item nav-link text-warning" href="dashboard">Mon Dashboard</a>
+                                <a class="nav-item nav-link text-warning" href="/dashboard">Mon Dashboard</a>
                                 @endauth
                             </div>
                         </div>

@@ -149,7 +149,7 @@
                             </p>
                             <div class="d-flex justify-content-between">
                                 <a class="btn btn-sm btn-primary rounded py-2 px-4" href="{{"lodgment/$lodgment->slug/$lodgment->id"}}">Detail</a>
-                                <a class="btn btn-sm btn-dark rounded py-2 px-4" href="">Reserver</a>
+                                <a class="btn btn-sm btn-dark rounded py-2 px-4" href="{{"/booking/$lodgment->id"}}">Reserver</a>
                             </div>
                         </div>
                     </div>

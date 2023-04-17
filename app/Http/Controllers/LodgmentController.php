@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\City;
+use App\Models\Galery;
 use App\Models\Lodgment;
 use App\Models\LodgmentType;
 use Illuminate\Http\Request;
+use Image;
 
 class LodgmentController extends Controller
 {
@@ -19,6 +21,13 @@ class LodgmentController extends Controller
         return view('dashboard.pages.lodgments.index', compact('lodgments'));
     }
 
+    public function booking($id)
+    {
+        $lodgment = Lodgment::where('id', $id)->first();
+        $images = Galery::where("lodgment_id", $lodgment->id)->get();
+        return view('client.pages.lodgment.reservation', compact('lodgment', 'images'));
+    }
+
     public function create()
     {
         $types = LodgmentType::all();
@@ -28,7 +37,8 @@ class LodgmentController extends Controller
 
     public function show(Lodgment $lodgment)
     {
-        return view('dashboard.pages.lodgments.details', compact('lodgment'));
+        $images = Galery::where("lodgment_id", $lodgment->id)->get();
+        return view('dashboard.pages.lodgments.details', compact('lodgment', 'images'));
     }
 
     public function publish(Lodgment $lodgment)
@@ -78,13 +88,24 @@ class LodgmentController extends Controller
     public function store(Request $request)
     {
 
+
         $filename = time() . '.' . $request->image->extension();
 
-        $path = $request->file('image')->storeAs(
-            'lodgments',
-            $filename,
-            'public'
-        );
+        // $path = $request->file('image')->storeAs(
+        //     'lodgments',
+        //     $filename,
+        //     'public'
+        // );
+
+
+        $image = $request->file('image');
+        // $input['imagename'] = time().'.'.$image->extension();
+
+        $destinationPath = public_path('/storage/lodgments');
+        $img = Image::make($image->path());
+        $name = $img->resize(400, 400, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save($destinationPath . '/' . $filename);
 
         $lodgment = new Lodgment();
         $lodgment->title = $request->title;
@@ -97,9 +118,32 @@ class LodgmentController extends Controller
         $lodgment->description = $request->description;
         $lodgment->user_id = $request->user_id;
         $lodgment->slug = preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $request->title));
-        $lodgment->img_path = $path;
-
+        $lodgment->img_path = 'lodgments/' . $name->basename;
+        $lodgment->state = 1;
         $lodgment->save();
+
+        $last = Lodgment::latest()->first();
+
+        // $images = $request->file('images');
+        $path = public_path('/storage/galery');
+
+
+        foreach ($request->file('images') as $image) {
+
+            $galery = new Galery();
+
+            $filename = random_int(100000, 999999) . time() . '.' . $request->image->extension();
+
+            $img = Image::make($image->path());
+            $name = $img->resize(400, 400, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($path . '/' . $filename);
+
+            $galery->lodgment_id = $last->id;
+            $galery->image_path = 'galery/' . $name->basename;
+
+            $galery->save();
+        }
 
         return redirect('/lodgments');
     }

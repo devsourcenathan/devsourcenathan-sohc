@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\City;
+use App\Models\Galery;
 use App\Models\Lodgment;
 use App\Models\LodgmentType;
 use App\Models\Town;
@@ -31,9 +32,9 @@ class HomeController extends Controller
 
     public function about()
     {
-        $lodgment_number = 500;
+        $lodgment_number = Lodgment::all()->count();
 
-        $users_number = 160;
+        $users_number = User::all()->count();
         return view('client.pages.about', compact('lodgment_number', 'users_number'));
     }
 
@@ -54,17 +55,9 @@ class HomeController extends Controller
         $cities = City::all();
         $towns = Town::all();
 
-
-        $type = $request->type;
-        $location = $request->location;
-        $town = $request->town;
-        $stars = $request->stars;
-
-        $lodgments = Lodgment::all();
-
-        // $lodgments = Lodgment::where(function ($query) {
-        //     $query->where('state', 1)->orWhere('type', $request->type)->orWhere('location', $request->location)->orWhere('town', $request->town)->orWhere('stars', $request->stars);
-        // })->get();
+        $lodgments = Lodgment::where(function ($query) use ($request) {
+            $query->where('state', 1)->where('type', $request->type)->where('location', $request->location)->where('town', $request->town)->where('stars', $request->stars);
+        })->get();
 
         // $lodgments = Lodgment::search()
 
@@ -80,7 +73,7 @@ class HomeController extends Controller
     public function details($slug, $id)
     {
         $lodgment = Lodgment::where('id', $id)->first();
-
-        return view('client.pages.lodgment.details', compact('lodgment'));
+        $images = Galery::where("lodgment_id", $lodgment->id)->get();
+        return view('client.pages.lodgment.details', compact('lodgment', 'images'));
     }
 }

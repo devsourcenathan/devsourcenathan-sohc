@@ -7,6 +7,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\LessorController;
 use App\Http\Controllers\LodgmentController;
 use App\Http\Controllers\ParamController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -29,19 +30,19 @@ Route::get('/dashboard', function () {
 // ---  Start dashboard route
 
 // Configs routes
-Route::get('/configs', [ConfigController::class, 'index']);
-Route::post('/configs/store', [ConfigController::class, 'store']);
+Route::get('/configs', [ConfigController::class, 'index'])->middleware('auth');
+Route::post('/configs/store', [ConfigController::class, 'store'])->middleware('auth');
 
 // Lodgment routes
-Route::get('/lodgments', [LodgmentController::class, 'index']);
-Route::get('/lodgments/create', [LodgmentController::class, 'create']);
-Route::get('/lodgments/details/{lodgment:slug}', [LodgmentController::class, 'show']);
-Route::get('/lodgments/details/publish/{lodgment:slug}', [LodgmentController::class, 'publish']);
-Route::get('/lodgments/details/unpublish/{lodgment:slug}', [LodgmentController::class, 'unpublish']);
-Route::get('/lodgments/details/reject/{lodgment:slug}', [LodgmentController::class, 'reject']);
+Route::get('/lodgments', [LodgmentController::class, 'index'])->middleware('auth');
+Route::get('/lodgments/create', [LodgmentController::class, 'create'])->middleware('auth');
+Route::get('/lodgments/details/{lodgment:slug}', [LodgmentController::class, 'show'])->middleware('auth');
+Route::get('/lodgments/details/publish/{lodgment:slug}', [LodgmentController::class, 'publish'])->middleware('auth');
+Route::get('/lodgments/details/unpublish/{lodgment:slug}', [LodgmentController::class, 'unpublish'])->middleware('auth');
+Route::get('/lodgments/details/reject/{lodgment:slug}', [LodgmentController::class, 'reject'])->middleware('auth');
 
 
-Route::prefix('dashboard')->group(function () {
+Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/customers', [UserController::class, 'customers']);
     Route::get('/customers/details/{id}', [UserController::class, 'customer_details']);
 
@@ -85,7 +86,7 @@ Route::post('/towns/store', [ParamController::class, 'store_town']);
 
 // Lessor Routes
 
-Route::prefix('lessor')->group(function () {
+Route::prefix('lessor')->middleware('auth')->group(function () {
     Route::get('/requests', [LessorController::class, 'requests'])->name('requests');
     Route::get('/lodgment', [LessorController::class, 'lodgment'])->name('lodgment');
     Route::get('/propose', [LessorController::class, 'propose'])->name('propose');
@@ -110,7 +111,11 @@ Route::get('/service', [HomeController::class, 'service']);
 Route::get('/lodgment', [HomeController::class, 'lodgment']);
 Route::get('/search', [HomeController::class, 'search']);
 
+Route::get('/booking/{id}', [LodgmentController::class, 'booking'])->middleware('auth');
+
 
 Route::get('/lodgment/{slug}/{id}', [HomeController::class, 'details']);
+
+Route::post('/payment/initialize', [PaymentController::class, 'initialize']);
 
 require __DIR__ . '/auth.php';

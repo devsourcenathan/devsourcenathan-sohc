@@ -8,6 +8,7 @@ use App\Models\LodgmentType;
 use App\Models\Town;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Image;
 
 class LessorController extends Controller
 {
@@ -39,11 +40,25 @@ class LessorController extends Controller
 
         $filename = time() . '.' . $request->image->extension();
 
-        $path = $request->file('image')->storeAs(
-            'lodgments',
-            $filename,
-            'public'
-        );
+        // $path = $request->file('image')->storeAs(
+        //     'lodgments',
+        //     $filename,
+        //     'public'
+        // );
+
+
+        $image = $request->file('image');
+        // $input['imagename'] = time().'.'.$image->extension();
+
+        // $destinationPath = public_path('/thumbnail');
+        $img = Image::make($image->path());
+        $test = $img->resize(400, 400, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save('public' . '/' . $filename);
+
+        dd($test);
+        // $destinationPath = public_path('/images');
+        // $image->move('public', $filename);
 
         $lodgment = new Lodgment();
         $lodgment->title = $request->title;
@@ -56,7 +71,7 @@ class LessorController extends Controller
         $lodgment->description = $request->description;
         $lodgment->user_id = $request->user_id;
         $lodgment->slug = preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $request->title));
-        $lodgment->img_path = $path;
+        // $lodgment->img_path = $path;
         $lodgment->state = 3;
 
         $lodgment->save();

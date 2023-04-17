@@ -28,16 +28,43 @@
                             <h6 class="section-title text-start text-primary text-uppercase">Description</h6>
                             <p class="mb-4">{{ $lodgment->description}}</p>
 
-                            <h6 class="section-title text-start text-primary text-uppercase">Details</h6>
-                            <p class="mb-4">{{ $lodgment->details}}</p>
+                            <h6 class="section-title text-start text-primary text-uppercase">Reservation</h6>
+                            <form action="/payment/initialize" method="POST">
+                                @csrf
+                                <div class="row g-3">
+                                    <div class="col-md-12">
+                                        <div class="form-floating">
+                                            <input type="tel" class="form-control" id="phone" placeholder="Numero de telephone">
+                                            <label for="name">Numero de telephone</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <input type="date" class="form-control" id="date" placeholder="Date">
+                                            <label for="subject">Date</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <textarea class="form-control" placeholder="Leave a message here" id="message" style="height: 150px">
+                                                Bonjour je souhaire reserver ce logement
+                                            </textarea>
+                                            <label for="message">Message au proprietaire</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <button class="btn btn-success w-100 py-3"  type="submit">Valider</button>
+                                    </div>
+                                    <div class="col-6">
+                                        <button class="btn btn-primary w-100 py-3">Discuter</button>
+                                    </div>
+                                </div>
+                            </form>
                             
-                            <a class="btn btn-primary py-3 px-5 mt-2" href="{{"/booking/$lodgment->id"}}">Reserver maintenant </a>
-
                            
                         </div>
                         <div class="col-lg-6">
                             <div class="row g-3">
-
                                 @isset($images[0])
                                 <div class="col-6 text-end">
                                     <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.1s" src="{{Storage::url($images[0]->image_path)}}" style="margin-top: 25%;">
@@ -58,7 +85,6 @@
                                     <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.7s" src="{{Storage::url($images[2]->image_path)}}">
                                 </div>
                                 @endisset
-
                             </div>
                         </div>
                     </div>

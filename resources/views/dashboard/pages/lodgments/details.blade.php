@@ -88,12 +88,13 @@
                   <div class="carousel-item active">
                     <img src="{{ Storage::url($lodgment->img_path)}}" class="d-block w-100" alt="...">
                   </div>
+                  @foreach ($images as $image)
                   <div class="carousel-item">
-                    <img src="{{ Storage::url($lodgment->img_path)}}" class="d-block w-100" alt="...">
+                    <img src="{{ Storage::url($image->image_path)}}" class="d-block w-100" alt="...">
                   </div>
-                  <div class="carousel-item">
-                    <img src="{{ Storage::url($lodgment->img_path)}}" class="d-block w-100" alt="...">
-                  </div>
+                  @endforeach
+                 
+
                 </div>
 
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">

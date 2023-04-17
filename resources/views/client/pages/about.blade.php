@@ -46,7 +46,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a class="btn btn-primary py-3 px-5 mt-2" href="">Decouvrir les Logements</a>
+                            <a class="btn btn-primary py-3 px-5 mt-2" href="/lodgment">Decouvrir les Logements</a>
                         </div>
                         <div class="col-lg-6">
                             <div class="row g-3">
