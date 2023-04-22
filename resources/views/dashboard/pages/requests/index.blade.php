@@ -26,9 +26,15 @@
                 <td>{{$lodgment->description}}</td>
                 <td>{{$lodgment->price}}</td>
                 <td>{{$lodgment->location}}</td>
-                <td>{{$lodgment->state ? "En ligne" : "Pas en ligne"}}</td>
                 <td>
-                    <a href="lodgments/publish/{{$lodgment->slug}}" class="badge rounded-pill bg-success cursor-pointer" style="cursor: pointer;">Publier</a>
+                    @if ($lodgment->state == 3 || $lodgment->state == 0 || $lodgment->state == 4)
+                        Pas en ligne
+                    @elseif($lodgment->state == 1)
+                        En ligne
+                    @endif    
+                </td>
+                <td>
+                    <a href="lodgments/details/publish/{{$lodgment->id}}" class="badge rounded-pill bg-success cursor-pointer" style="cursor: pointer;">Publier</a>
                     <a href="lodgments/details/{{$lodgment->slug}}" class="badge rounded-pill bg-info cursor-pointer" style="cursor: pointer;">Afficher</a>
                 </td>
             </tr>

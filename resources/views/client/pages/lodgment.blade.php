@@ -29,7 +29,8 @@
                                 <div class="row g-2">
                                     <div class="col-md-3">
                                         <select name="city" id="city" class="form-control" required>
-                                            <option value="all" disabled selected>Ville</option>
+                                            <option value="" disabled>Ville</option>
+                                            <option value="all" selected>Toutes les villles</option>
                                             @forelse ($cities as $city)
                                             <option value="{{ $city->name}}">{{ $city->name}}</option>
                                             @empty
@@ -39,7 +40,8 @@
                                     </div>
                                     <div class="col-md-3">
                                         <select name="town" id="town" class="form-control" required>
-                                            <option value="all" disabled selected>Quartier</option>
+                                            <option value="" disabled>Quartier</option>
+                                            <option value="all" selected>Tout les quartiers</option>
                                             @forelse ($towns as $town)
                                             <option value="{{ $town->name}}">{{ $town->name}}</option>
                                             @empty
@@ -49,7 +51,8 @@
                                     </div>
                                     <div class="col-md-3">
                                         <select name="type" id="type" class="form-control" required>
-                                            <option value="all" disabled selected>Type</option>
+                                            <option value="" disabled>Type</option>
+                                            <option value="all" selected>Tout les types</option>
                                             @forelse ($types as $type)
                                             <option value="{{ $type->name}}">{{ $type->name}}</option>
                                             @empty
@@ -59,7 +62,8 @@
                                     </div>
                                     <div class="col-md-3">
                                         <select class="form-select" name="stars">
-                                            <option selected>Etoile</option>
+                                            <option selected value="" disabled >Niveaux</option>
+                                            <option selected value="">Tout les niveaux</option>
                                             <option value="1">1</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>

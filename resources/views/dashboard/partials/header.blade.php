@@ -64,7 +64,7 @@ function collapsed($name){
 
         
 
-        <li class="nav-item dropdown">
+        {{-- <li class="nav-item dropdown">
 
           <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
             <i class="bi bi-bell"></i>
@@ -98,7 +98,7 @@ function collapsed($name){
 
           </ul><!-- End Notification Dropdown Items -->
 
-        </li><!-- End Notification Nav -->
+        </li><!-- End Notification Nav --> --}}
 
 
         <li class="nav-item dropdown pe-3">
@@ -278,7 +278,7 @@ function collapsed($name){
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-blank.html">
+        <a class="nav-link collapsed" href="/lessor/activities">
           <i class="bi bi-gear"></i>
           <span>Mon activite</span>
         </a>
@@ -294,7 +294,7 @@ function collapsed($name){
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-blank.html">
+        <a class="nav-link collapsed" href="/dashboard/activities">
           <i class="bi bi-gear"></i>
           <span>Mon activite</span>
         </a>

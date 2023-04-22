@@ -1,5 +1,8 @@
 @extends('dashboard.partials.main')
-
+@php
+    use App\Models\User;
+    use App\Models\Lodgment;
+@endphp
 @section('content')
 <div class="card">
     <div class="card-body pt-3">
@@ -43,7 +46,11 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse ($lodgments as $lodgment)
+                @forelse ($reservations as $reservation)
+                @php
+                    // $user = User::find($reservstion->user_id);
+                    $lodgment = Lodgment::find($reservation->lodgment_id);
+                @endphp
                 <tr>
                     <td>{{$lodgment->title}}</td>
                     <td></td>

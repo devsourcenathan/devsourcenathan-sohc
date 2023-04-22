@@ -6,9 +6,13 @@ use App\Models\City;
 use App\Models\Galery;
 use App\Models\Lodgment;
 use App\Models\LodgmentType;
+use App\Models\Reservation;
 use App\Models\Town;
 use App\Models\User;
+use App\Models\Activity;
+use App\Models\Config;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -16,6 +20,22 @@ class HomeController extends Controller
     {
         // $this->middleware('auth')->except(['home', 'service', 'lodgment', 'about', 'contact']);
     }
+
+    public function dashboard()
+    {
+        $demands = Lodgment::where(function ($query) {
+            $query->where('state', 3)->orWhere('state', 4);
+        })->get();
+
+        $users = User::all();
+
+        $reservations = Reservation::all();
+
+        $activities = Activity::where('user_id', Auth::user()->id)->get();
+
+        return view('dashboard.dashboard', compact('demands', 'users', 'reservations', 'activities'));
+    }
+
     public function index()
     {
         $lodgments = Lodgment::where('state', 1)->limit(6)->get();
@@ -27,7 +47,8 @@ class HomeController extends Controller
 
     public function contact()
     {
-        return view('client.pages.contact');
+        $config = Config::all()->last();
+        return view('client.pages.contact', compact('config'));
     }
 
     public function about()
@@ -56,7 +77,7 @@ class HomeController extends Controller
         $towns = Town::all();
 
         $lodgments = Lodgment::where(function ($query) use ($request) {
-            $query->where('state', 1)->where('type', $request->type)->where('location', $request->location)->where('town', $request->town)->where('stars', $request->stars);
+            $query->where('state', 1)->orWhere('type', $request->type)->orWhere('location', $request->location)->orWhere('town', $request->town)->orWhere('stars', $request->stars);
         })->get();
 
         // $lodgments = Lodgment::search()

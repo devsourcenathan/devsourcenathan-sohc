@@ -34,29 +34,27 @@
                                 <div class="row g-3">
                                     <div class="col-md-12">
                                         <div class="form-floating">
-                                            <input type="tel" class="form-control" id="phone" placeholder="Numero de telephone">
+                                            <input type="tel" name="phone" class="form-control" id="phone" placeholder="Numero de telephone">
+                                            <input type="hidden" name="id_lodgment" value="{{ $lodgment->id }}">
                                             <label for="name">Numero de telephone</label>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-floating">
-                                            <input type="date" class="form-control" id="date" placeholder="Date">
-                                            <label for="subject">Date</label>
+                                            <input type="date" name="date" class="form-control" id="date" placeholder="Date">
+                                            <label for="date">Date</label>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-floating">
-                                            <textarea class="form-control" placeholder="Leave a message here" id="message" style="height: 150px">
+                                            <textarea class="form-control" name="message" placeholder="Leave a message here" id="message" style="height: 150px">
                                                 Bonjour je souhaire reserver ce logement
                                             </textarea>
                                             <label for="message">Message au proprietaire</label>
                                         </div>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-12">
                                         <button class="btn btn-success w-100 py-3"  type="submit">Valider</button>
-                                    </div>
-                                    <div class="col-6">
-                                        <button class="btn btn-primary w-100 py-3">Discuter</button>
                                     </div>
                                 </div>
                             </form>

@@ -14,15 +14,16 @@
                         <div class="row gy-4">
                             <div class="col-md-4">
                                 <h6 class="section-title text-start text-primary text-uppercase">Reservation</h6>
-                                <p><i class="fa fa-envelope-open text-primary me-2"></i>booking@sohc.com</p>
+                                <p><i class="fa fa-envelope-open text-primary me-2"></i>{{$config->booking_email}}</p>
                             </div>
                             <div class="col-md-4">
                                 <h6 class="section-title text-start text-primary text-uppercase">Generale</h6>
-                                <p><i class="fa fa-envelope-open text-primary me-2"></i>info@sohc.com</p>
+                                <p><i class="fa fa-envelope-open text-primary me-2"></i>{{$config->contact_email
+                                }}</p>
                             </div>
                             <div class="col-md-4">
                                 <h6 class="section-title text-start text-primary text-uppercase">Technique</h6>
-                                <p><i class="fa fa-envelope-open text-primary me-2"></i>tech@sohc.com</p>
+                                <p><i class="fa fa-envelope-open text-primary me-2"></i>{{$config->tech_email}}</p>
                             </div>
                         </div>
                     </div>

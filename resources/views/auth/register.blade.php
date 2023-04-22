@@ -59,6 +59,13 @@
                             name="password_confirmation" required />
           </div>
 
+          <div class="block mt-4">
+            <label for="confirm_age" class="inline-flex items-center">
+                <input id="confirm_age" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="confirm_age" required>
+                <span class="ml-2 text-sm text-gray-600">{{ __('Je confirme avoir plus de 17 ans !') }}</span>
+            </label>
+        </div>
+
           <div class="pt-1 mb-4">
             <x-button>
                 {{ __('Créer mon compte') }}

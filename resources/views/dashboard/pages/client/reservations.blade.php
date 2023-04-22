@@ -15,7 +15,6 @@ use App\Models\Lodgment;
                     <th>Titre du logment</th>
                     <th>Date</th>
                     <th>Etat</th>
-                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,14 +28,10 @@ use App\Models\Lodgment;
                     <td>{{$lodgment->title}}</td>
                     <td>{{$reservation->created_at}}</td>
                     <td></td>
-                    <td>
-
-                        {{-- <a href="/dashboard/customers/details/{{$customer->id}}" class="badge rounded-pill bg-info cursor-pointer" style="cursor: pointer;">Afficher</a> --}}
-                    </td>
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="7">Pas de clients !</td>
+                    <td colspan="7">Pas de reservation !</td>
                 </tr>
                 @endforelse
 

@@ -23,9 +23,7 @@ use App\Http\Controllers\UserController;
 
 Route::get('/', [HomeController::class, 'index']);
 
-Route::get('/dashboard', function () {
-    return view('dashboard.dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', [HomeController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
 
 // ---  Start dashboard route
 
@@ -37,7 +35,7 @@ Route::post('/configs/store', [ConfigController::class, 'store'])->middleware('a
 Route::get('/lodgments', [LodgmentController::class, 'index'])->middleware('auth');
 Route::get('/lodgments/create', [LodgmentController::class, 'create'])->middleware('auth');
 Route::get('/lodgments/details/{lodgment:slug}', [LodgmentController::class, 'show'])->middleware('auth');
-Route::get('/lodgments/details/publish/{lodgment:slug}', [LodgmentController::class, 'publish'])->middleware('auth');
+Route::get('/lodgments/details/publish/{id}', [LodgmentController::class, 'publish'])->middleware('auth');
 Route::get('/lodgments/details/unpublish/{lodgment:slug}', [LodgmentController::class, 'unpublish'])->middleware('auth');
 Route::get('/lodgments/details/reject/{lodgment:slug}', [LodgmentController::class, 'reject'])->middleware('auth');
 
@@ -57,6 +55,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
 
 
     Route::get('/reservations', [CustomerController::class, 'reservations']);
+    Route::get('/activities', [CustomerController::class, 'activities']);
 
 
 
@@ -72,17 +71,17 @@ Route::get('/requests', [LodgmentController::class, 'requests']);
 Route::get('/reservations', [LodgmentController::class, 'reservations']);
 
 // Params routes
-Route::get('/cities', [ParamController::class, 'cities']);
-Route::get('/types', [ParamController::class, 'types']);
-Route::get('/towns', [ParamController::class, 'towns']);
+Route::get('/cities', [ParamController::class, 'cities'])->middleware('auth');
+Route::get('/types', [ParamController::class, 'types'])->middleware('auth');
+Route::get('/towns', [ParamController::class, 'towns'])->middleware('auth');
 
-Route::get('/cities/store', [ParamController::class, 'create_city']);
-Route::get('/types/store', [ParamController::class, 'create_type']);
-Route::get('/towns/store', [ParamController::class, 'create_town']);
+Route::get('/cities/store', [ParamController::class, 'create_city'])->middleware('auth');
+Route::get('/types/store', [ParamController::class, 'create_type'])->middleware('auth');
+Route::get('/towns/store', [ParamController::class, 'create_town'])->middleware('auth');
 
-Route::post('/cities/store', [ParamController::class, 'store_city']);
-Route::post('/types/store', [ParamController::class, 'store_type']);
-Route::post('/towns/store', [ParamController::class, 'store_town']);
+Route::post('/cities/store', [ParamController::class, 'store_city'])->middleware('auth');
+Route::post('/types/store', [ParamController::class, 'store_type'])->middleware('auth');
+Route::post('/towns/store', [ParamController::class, 'store_town'])->middleware('auth');
 
 // Lessor Routes
 
@@ -90,6 +89,7 @@ Route::prefix('lessor')->middleware('auth')->group(function () {
     Route::get('/requests', [LessorController::class, 'requests'])->name('requests');
     Route::get('/lodgment', [LessorController::class, 'lodgment'])->name('lodgment');
     Route::get('/propose', [LessorController::class, 'propose'])->name('propose');
+    Route::get('/activities', [LessorController::class, 'activities'])->name('activities');
     Route::post('/propose/store', [LessorController::class, 'store']);
     Route::get('/propose/details/{slug}/{id}', [LessorController::class, 'details']);
     Route::get('/propose/publish/{slug}/{id}', [LessorController::class, 'publish']);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Lodgment;
+use App\Models\Reservation;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,8 +34,8 @@ class UserController extends Controller
     public function customer_details($id)
     {
         $customer = User::find($id);
-        $lodgments = [];
-        return view('dashboard.pages.customers.details', compact('customer', 'lodgments'));
+        $reservations = Reservation::where("user_id", $id)->get();
+        return view('dashboard.pages.customers.details', compact('customer', 'reservations'));
     }
 
     public function lessor_details($id)

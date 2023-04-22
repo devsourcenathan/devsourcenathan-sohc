@@ -1,0 +1,3 @@
+<?php
+
+$PUBLIC_API = "b.KyH8x667RmILBmQ8xDWy2alZHwPPIuVA";

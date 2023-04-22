@@ -6,6 +6,7 @@ use App\Models\City;
 use App\Models\Galery;
 use App\Models\Lodgment;
 use App\Models\LodgmentType;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Image;
 
@@ -41,18 +42,21 @@ class LodgmentController extends Controller
         return view('dashboard.pages.lodgments.details', compact('lodgment', 'images'));
     }
 
-    public function publish(Lodgment $lodgment)
+    public function publish($id)
     {
+        $lodgment = Lodgment::find($id);
         $lodgment->state = 1;
         $lodgment->save();
-        return view('dashboard.pages.lodgments.details', compact('lodgment'));
+        $images = Galery::where("lodgment_id", $lodgment->id)->get();
+        return view('dashboard.pages.lodgments.details', compact('lodgment', 'images'));
     }
 
     public function unpublish(Lodgment $lodgment)
     {
         $lodgment->state = 0;
         $lodgment->save();
-        return view('dashboard.pages.lodgments.details', compact('lodgment'));
+        $images = Galery::where("lodgment_id", $lodgment->id)->get();
+        return view('dashboard.pages.lodgments.details', compact('lodgment', 'images'));
     }
 
     public function reject(Lodgment $lodgment)
@@ -66,13 +70,14 @@ class LodgmentController extends Controller
     {
         $lodgments = Lodgment::where(function ($query) {
             $query->where('state', 3)->orWhere('state', 4);
-        })->get();;
+        })->get();
         return view('dashboard.pages.requests.index', compact('lodgments'));
     }
 
     public function reservations()
     {
-        return view('dashboard.pages.reservations.index');
+        $reservations = Reservation::all();
+        return view('dashboard.pages.reservations.index', compact('reservations'));
     }
 
     public function cities()

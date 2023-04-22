@@ -1,5 +1,9 @@
 @extends('dashboard.partials.main')
-
+@php
+    use App\Models\User;
+    use App\Models\Lodgment;
+    use App\Models\Reservation;
+@endphp
 @section('content')
     @if (Auth::user()->type == 'admin')
         <section class="section dashboard">
@@ -21,7 +25,7 @@
                             <i class="bi bi-cart"></i>
                         </div>
                         <div class="ps-3">
-                            <h6>145</h6>
+                            <h6>{{count($demands)}}</h6>
                         </div>
                         </div>
                     </div>
@@ -45,7 +49,7 @@
                             <i class="bi bi-currency-dollar"></i>
                         </div>
                         <div class="ps-3">
-                            <h6>264</h6>
+                            <h6>{{count($demands)}}</h6>
                         </div>
                         </div>
                     </div>
@@ -69,7 +73,7 @@
                             <i class="bi bi-people"></i>
                         </div>
                         <div class="ps-3">
-                            <h6>1244</h6>
+                            <h6>{{count($users)}}</h6>
                         </div>
                         </div>
                     </div>
@@ -88,75 +92,27 @@
                         <table class="table table-borderless datatable">
                         <thead>
                             <tr>
-                            <th scope="col">#</th>
                             <th scope="col">Client</th>
                             <th scope="col">Logement</th>
                             <th scope="col">Prix</th>
-                            <th scope="col">Status</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($reservations as $reservation)
+                            @php
+                                $user = User::find($reservation->user_id);
+                                $lodgment = Lodgment::find($reservation->lodgment_id);
+                            @endphp
                             <tr>
-                            <th scope="row"><a href="#">#2457</a></th>
-                            <td>Brandon Jacob</td>
-                            <td>
-                                <a href="#" class="text-primary"
-                                >At praesentium minu</a
-                                >
-                            </td>
-                            <td>$64</td>
-                            <td>
-                                <span class="badge bg-success">Approved</span>
-                            </td>
+                                <td>{{$user->name}}</td>
+                                <td>
+                                    <a href="#" class="text-primary"
+                                    >{{ $lodgment->title}}</a
+                                    >
+                                </td>
+                                <td>{{$reservation->price}}</td>
                             </tr>
-                            <tr>
-                            <th scope="row"><a href="#">#2147</a></th>
-                            <td>Bridie Kessler</td>
-                            <td>
-                                <a href="#" class="text-primary"
-                                >Blanditiis dolor omnis similique</a
-                                >
-                            </td>
-                            <td>$47</td>
-                            <td><span class="badge bg-warning">Pending</span></td>
-                            </tr>
-                            <tr>
-                            <th scope="row"><a href="#">#2049</a></th>
-                            <td>Ashleigh Langosh</td>
-                            <td>
-                                <a href="#" class="text-primary"
-                                >At recusandae consectetur</a
-                                >
-                            </td>
-                            <td>$147</td>
-                            <td>
-                                <span class="badge bg-success">Approved</span>
-                            </td>
-                            </tr>
-                            <tr>
-                            <th scope="row"><a href="#">#2644</a></th>
-                            <td>Angus Grady</td>
-                            <td>
-                                <a href="#" class="text-primar"
-                                >Ut voluptatem id earum et</a
-                                >
-                            </td>
-                            <td>$67</td>
-                            <td><span class="badge bg-danger">Rejected</span></td>
-                            </tr>
-                            <tr>
-                            <th scope="row"><a href="#">#2644</a></th>
-                            <td>Raheem Lehner</td>
-                            <td>
-                                <a href="#" class="text-primary"
-                                >Sunt similique distinctio</a
-                                >
-                            </td>
-                            <td>$165</td>
-                            <td>
-                                <span class="badge bg-success">Approved</span>
-                            </td>
-                            </tr>
+                            @endforeach
                         </tbody>
                         </table>
                     </div>
@@ -177,79 +133,28 @@
                     <h5 class="card-title">Derniere activites</h5>
 
                     <div class="activity">
-                    <div class="activity-item d-flex">
-                        <div class="activite-label">32 min</div>
-                        <i
-                        class="bi bi-circle-fill activity-badge text-success align-self-start"
-                        ></i>
-                        <div class="activity-content">
-                        Quia quae rerum
-                        <a href="#" class="fw-bold text-dark"
-                            >explicabo officiis</a
-                        >
-                        beatae
-                        </div>
-                    </div>
-                    <!-- End activity item-->
 
-                    <div class="activity-item d-flex">
-                        <div class="activite-label">56 min</div>
-                        <i
-                        class="bi bi-circle-fill activity-badge text-danger align-self-start"
-                        ></i>
-                        <div class="activity-content">
-                        Voluptatem blanditiis blanditiis eveniet
-                        </div>
-                    </div>
-                    <!-- End activity item-->
+                        @forelse ($activities as $activity)
+                            <div class="activity-item d-flex">
+                                <i
+                                class="bi bi-circle-fill activity-badge text-primary align-self-start"
+                                ></i>
+                                <div class="activity-content">
+                                    {{ $activity->title}}
+                                </div>
+                            </div>
+                        @empty
+                            <div class="activity-item d-flex">
+                                <i
+                                class="bi bi-circle-fill activity-badge text-warning align-self-start"
+                                ></i>
+                                <div class="activity-content">
+                                    Aucune activite pour le moment
+                                </div>
+                            </div>
+                        @endforelse
+                        
 
-                    <div class="activity-item d-flex">
-                        <div class="activite-label">2 hrs</div>
-                        <i
-                        class="bi bi-circle-fill activity-badge text-primary align-self-start"
-                        ></i>
-                        <div class="activity-content">
-                        Voluptates corrupti molestias voluptatem
-                        </div>
-                    </div>
-                    <!-- End activity item-->
-
-                    <div class="activity-item d-flex">
-                        <div class="activite-label">1 day</div>
-                        <i
-                        class="bi bi-circle-fill activity-badge text-info align-self-start"
-                        ></i>
-                        <div class="activity-content">
-                        Tempore autem saepe
-                        <a href="#" class="fw-bold text-dark"
-                            >occaecati voluptatem</a
-                        >
-                        tempore
-                        </div>
-                    </div>
-                    <!-- End activity item-->
-
-                    <div class="activity-item d-flex">
-                        <div class="activite-label">2 days</div>
-                        <i
-                        class="bi bi-circle-fill activity-badge text-warning align-self-start"
-                        ></i>
-                        <div class="activity-content">
-                        Est sit eum reiciendis exercitationem
-                        </div>
-                    </div>
-                    <!-- End activity item-->
-
-                    <div class="activity-item d-flex">
-                        <div class="activite-label">4 weeks</div>
-                        <i
-                        class="bi bi-circle-fill activity-badge text-muted align-self-start"
-                        ></i>
-                        <div class="activity-content">
-                        Dicta dolorem harum nulla eius. Ut quidem quidem sit quas
-                        </div>
-                    </div>
-                    <!-- End activity item-->
                     </div>
                 </div>
                 </div>
@@ -263,6 +168,9 @@
     @endif
 
     @if (Auth::user()->type == 'client')
+    @php
+        $reservations = Reservation::where("user_id", Auth::user()->id)->get();
+    @endphp
     <section class="section dashboard">
         <div class="row">
         <!-- Left side columns -->
@@ -282,7 +190,7 @@
                         <i class="bi bi-cart"></i>
                     </div>
                     <div class="ps-3">
-                        <h6>145</h6>
+                        <h6>{{count($reservations)}}</h6>
                     </div>
                     </div>
                 </div>
@@ -290,53 +198,6 @@
             </div>
             <!-- End Sales Card -->
 
-            <!-- Revenue Card -->
-            <div class="col-xxl-4 col-md-6">
-                <div class="card info-card revenue-card">
-
-                <div class="card-body">
-                    <h5 class="card-title">
-                    Demandes
-                    </h5>
-
-                    <div class="d-flex align-items-center">
-                    <div
-                        class="card-icon rounded-circle d-flex align-items-center justify-content-center"
-                    >
-                        <i class="bi bi-currency-dollar"></i>
-                    </div>
-                    <div class="ps-3">
-                        <h6>264</h6>
-                    </div>
-                    </div>
-                </div>
-                </div>
-            </div>
-            <!-- End Revenue Card -->
-
-            <!-- Customers Card -->
-            <div class="col-xxl-4 col-xl-12">
-                <div class="card info-card customers-card">
-
-                <div class="card-body">
-                    <h5 class="card-title">
-                        Utlisateurs
-                    </h5>
-
-                    <div class="d-flex align-items-center">
-                    <div
-                        class="card-icon rounded-circle d-flex align-items-center justify-content-center"
-                    >
-                        <i class="bi bi-people"></i>
-                    </div>
-                    <div class="ps-3">
-                        <h6>1244</h6>
-                    </div>
-                    </div>
-                </div>
-                </div>
-            </div>
-            <!-- End Customers Card -->
             <!-- Recent Sales -->
             <div class="col-12">
                 <div class="card recent-sales overflow-auto">
@@ -348,76 +209,26 @@
 
                     <table class="table table-borderless datatable">
                     <thead>
+                        
                         <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Client</th>
-                        <th scope="col">Logement</th>
-                        <th scope="col">Prix</th>
-                        <th scope="col">Status</th>
+                            <th scope="col">Logement</th>
+                            <th scope="col">Prix</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                        <th scope="row"><a href="#">#2457</a></th>
-                        <td>Brandon Jacob</td>
-                        <td>
-                            <a href="#" class="text-primary"
-                            >At praesentium minu</a
-                            >
-                        </td>
-                        <td>$64</td>
-                        <td>
-                            <span class="badge bg-success">Approved</span>
-                        </td>
-                        </tr>
-                        <tr>
-                        <th scope="row"><a href="#">#2147</a></th>
-                        <td>Bridie Kessler</td>
-                        <td>
-                            <a href="#" class="text-primary"
-                            >Blanditiis dolor omnis similique</a
-                            >
-                        </td>
-                        <td>$47</td>
-                        <td><span class="badge bg-warning">Pending</span></td>
-                        </tr>
-                        <tr>
-                        <th scope="row"><a href="#">#2049</a></th>
-                        <td>Ashleigh Langosh</td>
-                        <td>
-                            <a href="#" class="text-primary"
-                            >At recusandae consectetur</a
-                            >
-                        </td>
-                        <td>$147</td>
-                        <td>
-                            <span class="badge bg-success">Approved</span>
-                        </td>
-                        </tr>
-                        <tr>
-                        <th scope="row"><a href="#">#2644</a></th>
-                        <td>Angus Grady</td>
-                        <td>
-                            <a href="#" class="text-primar"
-                            >Ut voluptatem id earum et</a
-                            >
-                        </td>
-                        <td>$67</td>
-                        <td><span class="badge bg-danger">Rejected</span></td>
-                        </tr>
-                        <tr>
-                        <th scope="row"><a href="#">#2644</a></th>
-                        <td>Raheem Lehner</td>
-                        <td>
-                            <a href="#" class="text-primary"
-                            >Sunt similique distinctio</a
-                            >
-                        </td>
-                        <td>$165</td>
-                        <td>
-                            <span class="badge bg-success">Approved</span>
-                        </td>
-                        </tr>
+                        @forelse ($reservations as $reservation)
+                        @php
+                            $lodgment = Lodgment::find($reservation->lodgment_id);
+                        @endphp
+                            <tr>
+                                <td>{{$lodgment->name}}</td>
+                                <td>{{$reservation->price}}</td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="2">Pas de reservation</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                     </table>
                 </div>
@@ -436,82 +247,32 @@
 
             <div class="card-body">
                 <h5 class="card-title">Derniere activites</h5>
-
                 <div class="activity">
-                <div class="activity-item d-flex">
-                    <div class="activite-label">32 min</div>
-                    <i
-                    class="bi bi-circle-fill activity-badge text-success align-self-start"
-                    ></i>
-                    <div class="activity-content">
-                    Quia quae rerum
-                    <a href="#" class="fw-bold text-dark"
-                        >explicabo officiis</a
-                    >
-                    beatae
-                    </div>
-                </div>
-                <!-- End activity item-->
 
-                <div class="activity-item d-flex">
-                    <div class="activite-label">56 min</div>
-                    <i
-                    class="bi bi-circle-fill activity-badge text-danger align-self-start"
-                    ></i>
-                    <div class="activity-content">
-                    Voluptatem blanditiis blanditiis eveniet
-                    </div>
-                </div>
-                <!-- End activity item-->
+                    @forelse ($activities as $activity)
+                        <div class="activity-item d-flex">
+                            <i
+                            class="bi bi-circle-fill activity-badge text-primary align-self-start"
+                            ></i>
+                            <div class="activity-content">
+                                {{ $activity->title}}
+                            </div>
+                        </div>
+                    @empty
+                        <div class="activity-item d-flex">
+                            <i
+                            class="bi bi-circle-fill activity-badge text-warning align-self-start"
+                            ></i>
+                            <div class="activity-content">
+                                Aucune activite pour le moment
+                            </div>
+                        </div>
+                    @endforelse
+                    
 
-                <div class="activity-item d-flex">
-                    <div class="activite-label">2 hrs</div>
-                    <i
-                    class="bi bi-circle-fill activity-badge text-primary align-self-start"
-                    ></i>
-                    <div class="activity-content">
-                    Voluptates corrupti molestias voluptatem
-                    </div>
                 </div>
-                <!-- End activity item-->
 
-                <div class="activity-item d-flex">
-                    <div class="activite-label">1 day</div>
-                    <i
-                    class="bi bi-circle-fill activity-badge text-info align-self-start"
-                    ></i>
-                    <div class="activity-content">
-                    Tempore autem saepe
-                    <a href="#" class="fw-bold text-dark"
-                        >occaecati voluptatem</a
-                    >
-                    tempore
-                    </div>
-                </div>
-                <!-- End activity item-->
-
-                <div class="activity-item d-flex">
-                    <div class="activite-label">2 days</div>
-                    <i
-                    class="bi bi-circle-fill activity-badge text-warning align-self-start"
-                    ></i>
-                    <div class="activity-content">
-                    Est sit eum reiciendis exercitationem
-                    </div>
-                </div>
-                <!-- End activity item-->
-
-                <div class="activity-item d-flex">
-                    <div class="activite-label">4 weeks</div>
-                    <i
-                    class="bi bi-circle-fill activity-badge text-muted align-self-start"
-                    ></i>
-                    <div class="activity-content">
-                    Dicta dolorem harum nulla eius. Ut quidem quidem sit quas
-                    </div>
-                </div>
-                <!-- End activity item-->
-                </div>
+                
             </div>
             </div>
             <!-- End Recent Activity -->
@@ -558,7 +319,7 @@
 
             <div class="card-body">
                 <h5 class="card-title">
-                Demandes
+                Logements
                 </h5>
 
                 <div class="d-flex align-items-center">
@@ -576,110 +337,26 @@
         </div>
         <!-- End Revenue Card -->
 
-        <!-- Customers Card -->
-        <div class="col-xxl-4 col-xl-12">
-            <div class="card info-card customers-card">
 
-            <div class="card-body">
-                <h5 class="card-title">
-                    Utlisateurs
-                </h5>
-
-                <div class="d-flex align-items-center">
-                <div
-                    class="card-icon rounded-circle d-flex align-items-center justify-content-center"
-                >
-                    <i class="bi bi-people"></i>
-                </div>
-                <div class="ps-3">
-                    <h6>1244</h6>
-                </div>
-                </div>
-            </div>
-            </div>
-        </div>
-        <!-- End Customers Card -->
         <!-- Recent Sales -->
         <div class="col-12">
             <div class="card recent-sales overflow-auto">
 
             <div class="card-body">
                 <h5 class="card-title">
-                Derniere Reservations
+                Derniere demandes
                 </h5>
 
                 <table class="table table-borderless datatable">
                 <thead>
                     <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Client</th>
                     <th scope="col">Logement</th>
-                    <th scope="col">Prix</th>
+                    <th scope="col">Date</th>
                     <th scope="col">Status</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                    <th scope="row"><a href="#">#2457</a></th>
-                    <td>Brandon Jacob</td>
-                    <td>
-                        <a href="#" class="text-primary"
-                        >At praesentium minu</a
-                        >
-                    </td>
-                    <td>$64</td>
-                    <td>
-                        <span class="badge bg-success">Approved</span>
-                    </td>
-                    </tr>
-                    <tr>
-                    <th scope="row"><a href="#">#2147</a></th>
-                    <td>Bridie Kessler</td>
-                    <td>
-                        <a href="#" class="text-primary"
-                        >Blanditiis dolor omnis similique</a
-                        >
-                    </td>
-                    <td>$47</td>
-                    <td><span class="badge bg-warning">Pending</span></td>
-                    </tr>
-                    <tr>
-                    <th scope="row"><a href="#">#2049</a></th>
-                    <td>Ashleigh Langosh</td>
-                    <td>
-                        <a href="#" class="text-primary"
-                        >At recusandae consectetur</a
-                        >
-                    </td>
-                    <td>$147</td>
-                    <td>
-                        <span class="badge bg-success">Approved</span>
-                    </td>
-                    </tr>
-                    <tr>
-                    <th scope="row"><a href="#">#2644</a></th>
-                    <td>Angus Grady</td>
-                    <td>
-                        <a href="#" class="text-primar"
-                        >Ut voluptatem id earum et</a
-                        >
-                    </td>
-                    <td>$67</td>
-                    <td><span class="badge bg-danger">Rejected</span></td>
-                    </tr>
-                    <tr>
-                    <th scope="row"><a href="#">#2644</a></th>
-                    <td>Raheem Lehner</td>
-                    <td>
-                        <a href="#" class="text-primary"
-                        >Sunt similique distinctio</a
-                        >
-                    </td>
-                    <td>$165</td>
-                    <td>
-                        <span class="badge bg-success">Approved</span>
-                    </td>
-                    </tr>
+                    
                 </tbody>
                 </table>
             </div>
@@ -696,85 +373,34 @@
         <!-- Recent Activity -->
         <div class="card">
 
-        <div class="card-body">
-            <h5 class="card-title">Derniere activites</h5>
+            <div class="card-body">
+                <h5 class="card-title">Derniere activites</h5>
 
-            <div class="activity">
-            <div class="activity-item d-flex">
-                <div class="activite-label">32 min</div>
-                <i
-                class="bi bi-circle-fill activity-badge text-success align-self-start"
-                ></i>
-                <div class="activity-content">
-                Quia quae rerum
-                <a href="#" class="fw-bold text-dark"
-                    >explicabo officiis</a
-                >
-                beatae
+                <div class="activity">
+
+                    @forelse ($activities as $activity)
+                        <div class="activity-item d-flex">
+                            <i
+                            class="bi bi-circle-fill activity-badge text-primary align-self-start"
+                            ></i>
+                            <div class="activity-content">
+                                {{ $activity->title}}
+                            </div>
+                        </div>
+                    @empty
+                        <div class="activity-item d-flex">
+                            <i
+                            class="bi bi-circle-fill activity-badge text-warning align-self-start"
+                            ></i>
+                            <div class="activity-content">
+                                Aucune activite pour le moment
+                            </div>
+                        </div>
+                    @endforelse
+                    
+
                 </div>
             </div>
-            <!-- End activity item-->
-
-            <div class="activity-item d-flex">
-                <div class="activite-label">56 min</div>
-                <i
-                class="bi bi-circle-fill activity-badge text-danger align-self-start"
-                ></i>
-                <div class="activity-content">
-                Voluptatem blanditiis blanditiis eveniet
-                </div>
-            </div>
-            <!-- End activity item-->
-
-            <div class="activity-item d-flex">
-                <div class="activite-label">2 hrs</div>
-                <i
-                class="bi bi-circle-fill activity-badge text-primary align-self-start"
-                ></i>
-                <div class="activity-content">
-                Voluptates corrupti molestias voluptatem
-                </div>
-            </div>
-            <!-- End activity item-->
-
-            <div class="activity-item d-flex">
-                <div class="activite-label">1 day</div>
-                <i
-                class="bi bi-circle-fill activity-badge text-info align-self-start"
-                ></i>
-                <div class="activity-content">
-                Tempore autem saepe
-                <a href="#" class="fw-bold text-dark"
-                    >occaecati voluptatem</a
-                >
-                tempore
-                </div>
-            </div>
-            <!-- End activity item-->
-
-            <div class="activity-item d-flex">
-                <div class="activite-label">2 days</div>
-                <i
-                class="bi bi-circle-fill activity-badge text-warning align-self-start"
-                ></i>
-                <div class="activity-content">
-                Est sit eum reiciendis exercitationem
-                </div>
-            </div>
-            <!-- End activity item-->
-
-            <div class="activity-item d-flex">
-                <div class="activite-label">4 weeks</div>
-                <i
-                class="bi bi-circle-fill activity-badge text-muted align-self-start"
-                ></i>
-                <div class="activity-content">
-                Dicta dolorem harum nulla eius. Ut quidem quidem sit quas
-                </div>
-            </div>
-            <!-- End activity item-->
-            </div>
-        </div>
         </div>
         <!-- End Recent Activity -->
 
