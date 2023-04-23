@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
 use App\Models\Config;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ConfigController extends Controller
 {
@@ -29,6 +31,12 @@ class ConfigController extends Controller
         $configs->location = $request->location;
 
         $configs->update();
+
+        $activity = new Activity();
+        $activity->title = "Modification des parametres du site";
+        $activity->user_id = Auth::user()->id;
+        $activity->save();
+
 
         return redirect('/configs');
     }

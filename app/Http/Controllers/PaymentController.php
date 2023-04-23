@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -37,6 +38,11 @@ class PaymentController extends Controller
         $reservation->user_id = Auth::user()->id;
 
         $reservation->save();
+
+        $activity = new Activity();
+        $activity->title = "Reservation d'un logement";
+        $activity->user_id = Auth::user()->id;
+        $activity->save();
 
         return view('client.pages.lodgment.validate', compact('reservation'));
     }

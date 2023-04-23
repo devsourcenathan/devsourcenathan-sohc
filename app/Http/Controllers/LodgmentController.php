@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
 use App\Models\City;
 use App\Models\Galery;
 use App\Models\Lodgment;
 use App\Models\LodgmentType;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Image;
 
 class LodgmentController extends Controller
@@ -47,6 +49,12 @@ class LodgmentController extends Controller
         $lodgment = Lodgment::find($id);
         $lodgment->state = 1;
         $lodgment->save();
+
+        $activity = new Activity();
+        $activity->title = "Publication d'un de logement";
+        $activity->user_id = Auth::user()->id;
+        $activity->save();
+
         $images = Galery::where("lodgment_id", $lodgment->id)->get();
         return view('dashboard.pages.lodgments.details', compact('lodgment', 'images'));
     }
@@ -56,6 +64,11 @@ class LodgmentController extends Controller
         $lodgment->state = 0;
         $lodgment->save();
         $images = Galery::where("lodgment_id", $lodgment->id)->get();
+
+        $activity = new Activity();
+        $activity->title = "Supression en ligne logement";
+        $activity->user_id = Auth::user()->id;
+        $activity->save();
         return view('dashboard.pages.lodgments.details', compact('lodgment', 'images'));
     }
 
@@ -63,6 +76,12 @@ class LodgmentController extends Controller
     {
         $lodgment->state = 4;
         $lodgment->save();
+
+        $activity = new Activity();
+        $activity->title = "Rejet d'une demande de logement";
+        $activity->user_id = Auth::user()->id;
+        $activity->save();
+
         return view('dashboard.pages.lodgments.details', compact('lodgment'));
     }
 
@@ -95,13 +114,6 @@ class LodgmentController extends Controller
 
 
         $filename = time() . '.' . $request->image->extension();
-
-        // $path = $request->file('image')->storeAs(
-        //     'lodgments',
-        //     $filename,
-        //     'public'
-        // );
-
 
         $image = $request->file('image');
         // $input['imagename'] = time().'.'.$image->extension();
@@ -149,6 +161,11 @@ class LodgmentController extends Controller
 
             $galery->save();
         }
+
+        $activity = new Activity();
+        $activity->title = "Enregistrement d'un logement";
+        $activity->user_id = Auth::user()->id;
+        $activity->save();
 
         return redirect('/lodgments');
     }

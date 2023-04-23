@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
 use App\Models\City;
 use App\Models\LodgmentType;
 use App\Models\Town;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ParamController extends Controller
 {
@@ -44,6 +46,11 @@ class ParamController extends Controller
 
         $city->save();
 
+        $activity = new Activity();
+        $activity->title = "Ajout d'une ville";
+        $activity->user_id = Auth::user()->id;
+        $activity->save();
+
         return redirect('/cities');
     }
 
@@ -55,6 +62,11 @@ class ParamController extends Controller
 
         $town->save();
 
+        $activity = new Activity();
+        $activity->title = "Ajout d'un quartier";
+        $activity->user_id = Auth::user()->id;
+        $activity->save();
+
         return redirect('/towns');
     }
 
@@ -65,6 +77,11 @@ class ParamController extends Controller
         $type->name = $request->name;
 
         $type->save();
+
+        $activity = new Activity();
+        $activity->title = "Ajout d'un type de logement";
+        $activity->user_id = Auth::user()->id;
+        $activity->save();
 
         return redirect('/types');
     }
