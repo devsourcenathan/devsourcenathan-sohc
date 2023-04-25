@@ -27,7 +27,15 @@ use App\Models\Lodgment;
                 <tr>
                     <td>{{$lodgment->title}}</td>
                     <td>{{$reservation->created_at}}</td>
-                    <td></td>
+                    <td>
+                        @if ($reservation->state == "waiting")
+                            En attente
+                        @elseif($reservation->state == "reject")
+                            Rejeté
+                        @else
+                            Approuvé
+                        @endif    
+                    </td>
                 </tr>
                 @empty
                 <tr>

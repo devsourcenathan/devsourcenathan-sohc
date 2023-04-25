@@ -18,7 +18,7 @@ class CustomerController extends Controller
 
     public function activities()
     {
-        $activities = Activity::where("user_id", Auth::user()->id)->get();
+        $activities = Activity::where("user_id", Auth::user()->id)->orderBy("id", "desc")->get();
 
         return view('dashboard.pages.client.activity', compact('activities'));
     }

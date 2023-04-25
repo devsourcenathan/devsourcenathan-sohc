@@ -221,7 +221,7 @@
                                 $lodgment = Lodgment::find($reservation->lodgment_id);
                             @endphp
                                 <tr>
-                                    <td>{{$lodgment->name}}</td>
+                                    <td>{{$lodgment->title}}</td>
                                     <td>{{$reservation->price}}</td>
                                 </tr>
                             @empty
@@ -287,10 +287,13 @@
 
 @if (Auth::user()->type == 'lessor')
         @php
-            $requests = Lodgment::where("user_id", Auth::user()->id)->where(function ($query) {
+            $requests_lessor = Lodgment::where("user_id", Auth::user()->id)->where(function ($query) {
             $query->where('state', 3)->orWhere('state', 4);
         })->get();
-            $lodgments = Lodgment::where("user_id", Auth::user()->id)->get();
+            $lodgments_lessor = $requests = Lodgment::where("user_id", Auth::user()->id)->where(function ($query) {
+            $query->where('state', 1)->orWhere('state', 0);
+        })->get();
+
         @endphp
 <section class="section dashboard">
     <div class="row">
@@ -311,7 +314,7 @@
                     <i class="bi bi-cart"></i>
                 </div>
                 <div class="ps-3">
-                    <h6>{{count($requests)}}</h6>
+                    <h6>{{count($requests_lessor)}}</h6>
                 </div>
                 </div>
             </div>
@@ -335,7 +338,7 @@
                     <i class="bi bi-currency-dollar"></i>
                 </div>
                 <div class="ps-3">
-                    <h6>{{count($lodgments)}}</h6>
+                    <h6>{{count($lodgments_lessor)}}</h6>
                 </div>
                 </div>
             </div>
@@ -362,9 +365,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($requests as $request)
+                    @forelse ($requests_lessor as $request)
                         <tr>
-                            
+                            <td>{{$request->title}}</td>
+                            <td>{{$request->created_at}}</td>
+                            <td>
+                                @if($request->state === 4)
+                                    Rejeté
+                                @elseif($request->state === 3)
+                                    En attente
+                                @endif
+                            </td>
                         </tr>
                     @empty
                         

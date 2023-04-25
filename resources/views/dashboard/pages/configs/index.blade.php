@@ -31,7 +31,27 @@
             <label for="location" class="form-label">Localisation</label>
             <input type="text" class="form-control" id="location" name="location" value="{{ $configs->location}}" required>
           </div>
-          
+
+          <h5 class="card-title">Informations de paiements</h5>
+          <div class="col-md-6">
+            <label for="om_name" class="form-label">Nom Orange Money</label>
+            <input type="text" class="form-control" id="om_name" name="om_name" autocomplete="false" value="{{ $configs->om_name}}" required>
+          </div>
+
+          <div class="col-md-6">
+            <label for="om_number" class="form-label">Numero Orange Money</label>
+            <input type="text" class="form-control" id="om_number" name="om_number" autocomplete="false" value="{{ $configs->om_number}}" required>
+          </div>
+
+          <div class="col-md-6">
+            <label for="momo_name" class="form-label">Nom Mobile Money</label>
+            <input type="text" class="form-control" id="momo_name" name="momo_name" autocomplete="false" value="{{ $configs->momo_name}}" required>
+          </div>
+
+          <div class="col-md-6">
+            <label for="momo_number" class="form-label">Numero Mobile Money</label>
+            <input type="text" class="form-control" id="momo_number" name="momo_number" autocomplete="false" value="{{ $configs->momo_number}}" required>
+          </div>
         <div class="mt-5">
           <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
         </div>

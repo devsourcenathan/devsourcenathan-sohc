@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activity;
+use App\Models\Lodgment;
 use App\Models\Reservation;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
 
 class PaymentController extends Controller
 {
@@ -44,6 +47,69 @@ class PaymentController extends Controller
         $activity->user_id = Auth::user()->id;
         $activity->save();
 
-        return view('client.pages.lodgment.validate', compact('reservation'));
+        $lodgment = Lodgment::find($request->id_lodgment);
+
+        $user = User::find($reservation->user_id);
+        $details = [
+            'title' => 'Mail from House Online Company',
+            'body' => 'Votre demande de reservation a été enregistré'
+        ];
+
+        Mail::to($user->email)->send(new \App\Mail\NotifyMail($details));
+
+
+        return view('client.pages.lodgment.validate', compact('reservation', 'lodgment'));
+    }
+
+    public function confirm(Request $request)
+    {
+        $reservation = Reservation::find($request->id_reservation);
+        $reservation->id_trans = $request->id_trans;
+
+        $reservation->save();
+
+
+        $activity = new Activity();
+        $activity->title = "Confirmation d'une reservation";
+        $activity->user_id = Auth::user()->id;
+        $activity->save();
+        return redirect('/reservations');
+    }
+
+    public function confirmed($id)
+    {
+        $reservation = Reservation::find($id);
+
+        $reservation->state = "approved";
+
+        $reservation->save();
+
+        $user = User::find($reservation->user_id);
+        $details = [
+            'title' => 'Mail from House Online Company',
+            'body' => 'Votre demande de reservation a été rejeté'
+        ];
+
+        Mail::to($user->email)->send(new \App\Mail\NotifyMail($details));
+
+        return redirect("/reservations");
+    }
+
+    public function reject($id)
+    {
+        $reservation = Reservation::find($id);
+
+        $reservation->state = "rejected";
+        $reservation->save();
+
+        $user = User::find($reservation->user_id);
+        $details = [
+            'title' => 'Mail from House Online Company',
+            'body' => 'Votre demande de reservation a été approuvé'
+        ];
+
+        Mail::to($user->email)->send(new \App\Mail\NotifyMail($details));
+
+        return redirect("/reservations");
     }
 }

@@ -17,6 +17,8 @@
                 <th>Client</th>
                 <th>Logment</th>
                 <th>Telephone</th>
+                <th>ID Transaction</th>
+                <th>Status</th>
                 <th>Date</th>
                 <th>Actions</th>
             </tr>
@@ -31,8 +33,22 @@
                     <td>{{$user->name}}</td>
                     <td>{{$lodgment->title}}</td>
                     <td>{{$reservation->phone}}</td>
+                    <td>{{$reservation->id_trans}}</td>
                     <td>{{$reservation->date}}</td>
                     <td>
+                        @if ($reservation->state == "approved")
+                            Approuvé                       
+                        @elseif($reservation->state == "rejected")
+                            Rejeté
+                        @else
+                            En attente
+                        @endif    
+                    </td>
+                    <td>
+                        @if ($reservation->state == "waiting")
+                            <a href="/reservations/confirm/{{$reservation->id}}" class="badge rounded-pill bg-success cursor-pointer" style="cursor: pointer;">Confirmer</a>
+                            <a href="/reservations/reject/{{$reservation->id}}" class="badge rounded-pill bg-danger cursor-pointer" style="cursor: pointer;">Rejeter</a>   
+                        @endif
                     </td>
                 </tr>
             @empty

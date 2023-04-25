@@ -29,9 +29,9 @@ class HomeController extends Controller
 
         $users = User::all();
 
-        $reservations = Reservation::all();
+        $reservations = Reservation::limit(10)->get();
 
-        $activities = Activity::where('user_id', Auth::user()->id)->get();
+        $activities = Activity::where('user_id', Auth::user()->id)->orderBy("id", 'desc')->limit(10)->get();
 
         return view('dashboard.dashboard', compact('demands', 'users', 'reservations', 'activities'));
     }

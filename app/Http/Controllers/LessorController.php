@@ -79,7 +79,7 @@ class LessorController extends Controller
         $activity->user_id = Auth::user()->id;
         $activity->save();
 
-        return redirect('/lessor/request');
+        return redirect('/lessor/requests');
     }
 
     public function details($slug, $id)

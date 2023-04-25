@@ -30,6 +30,11 @@ class ConfigController extends Controller
         $configs->tech_email = $request->tech_email;
         $configs->location = $request->location;
 
+        $configs->om_name = $request->om_name;
+        $configs->om_number = $request->om_number;
+        $configs->momo_name = $request->momo_name;
+        $configs->momo_number = $request->momo_number;
+
         $configs->update();
 
         $activity = new Activity();

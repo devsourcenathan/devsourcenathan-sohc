@@ -20,6 +20,10 @@ class CreateConfigsTable extends Migration
             $table->string('booking_email');
             $table->string('tech_email');
             $table->string('location');
+            $table->string('om_name');
+            $table->string('om_number');
+            $table->string('momo_name');
+            $table->string('momo_number');
             $table->timestamps();
         });
     }

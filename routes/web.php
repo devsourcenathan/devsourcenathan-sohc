@@ -8,6 +8,7 @@ use App\Http\Controllers\LessorController;
 use App\Http\Controllers\LodgmentController;
 use App\Http\Controllers\ParamController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\SendEmailController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -55,6 +56,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
 
 
     Route::get('/reservations', [CustomerController::class, 'reservations']);
+
     Route::get('/activities', [CustomerController::class, 'activities']);
 
 
@@ -69,6 +71,8 @@ Route::get('/requests', [LodgmentController::class, 'requests']);
 
 // Reservation routes
 Route::get('/reservations', [LodgmentController::class, 'reservations']);
+Route::get('/reservations/confirm/{id}', [PaymentController::class, 'confirmed']);
+Route::get('/reservations/reject/{id}', [PaymentController::class, 'reject']);
 
 // Params routes
 Route::get('/cities', [ParamController::class, 'cities'])->middleware('auth');
@@ -117,5 +121,9 @@ Route::get('/booking/{id}', [LodgmentController::class, 'booking'])->middleware(
 Route::get('/lodgment/{slug}/{id}', [HomeController::class, 'details']);
 
 Route::post('/payment/initialize', [PaymentController::class, 'initialize']);
+Route::post('/payment/validate', [PaymentController::class, 'confirm']);
+
+Route::get('send-email', [SendEmailController::class, 'index']);
+
 
 require __DIR__ . '/auth.php';
