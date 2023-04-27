@@ -29,12 +29,12 @@
 
                 <div class="row">
                   <div class="col-lg-3 col-md-4 label">Type de logement</div>
-                  <div class="col-lg-9 col-md-8">{{$lodgment->location}}</div>
+                  <div class="col-lg-9 col-md-8">{{$lodgment->type}}</div>
                 </div>
 
                 <div class="row">
                   <div class="col-lg-3 col-md-4 label">Ville</div>
-                  <div class="col-lg-9 col-md-8">{{$lodgment->type}}</div>
+                  <div class="col-lg-9 col-md-8">{{$lodgment->location}}</div>
                 </div>
 
 

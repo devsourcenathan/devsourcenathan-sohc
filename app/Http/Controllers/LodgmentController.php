@@ -131,7 +131,7 @@ class LodgmentController extends Controller
         $lodgment->details = $request->details;
         $lodgment->pieces = $request->pieces;
         $lodgment->location = $request->location;
-        // $lodgment->location = $request->location;
+        $lodgment->type = $request->type;
         $lodgment->description = $request->description;
         $lodgment->user_id = $request->user_id;
         $lodgment->slug = preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $request->title));
