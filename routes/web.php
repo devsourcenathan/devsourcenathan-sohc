@@ -56,6 +56,9 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
 
 
     Route::get('/reservations', [CustomerController::class, 'reservations']);
+    Route::get('/my_lodgments', [CustomerController::class, 'my_lodgments']);
+
+
 
     Route::get('/activities', [CustomerController::class, 'activities']);
 
@@ -124,6 +127,11 @@ Route::post('/payment/initialize', [PaymentController::class, 'initialize']);
 Route::post('/payment/validate', [PaymentController::class, 'confirm']);
 
 Route::get('send-email', [SendEmailController::class, 'index']);
+
+Route::get('conditions', [HomeController::class, 'conditions']);
+Route::get('policy', [HomeController::class, 'policy']);
+
+
 
 
 require __DIR__ . '/auth.php';

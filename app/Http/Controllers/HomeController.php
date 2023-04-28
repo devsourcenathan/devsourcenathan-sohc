@@ -97,4 +97,14 @@ class HomeController extends Controller
         $images = Galery::where("lodgment_id", $lodgment->id)->get();
         return view('client.pages.lodgment.details', compact('lodgment', 'images'));
     }
+
+    public function conditions()
+    {
+        return view('client.pages.condition');
+    }
+
+    public function policy()
+    {
+        return view('client.pages.policy');
+    }
 }

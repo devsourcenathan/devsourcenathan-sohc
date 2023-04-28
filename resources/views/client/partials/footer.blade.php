@@ -32,9 +32,9 @@ $config = Config::all()->last();
                         </h6>
                         <a class="btn btn-link" href="/about">A propos</a>
                         <a class="btn btn-link" href="/contact">Nous contacter</a>
-                        <a class="btn btn-link" href="/policy">Privacy Policy</a>
-                        <a class="btn btn-link" href="/conditions">Termes & Condition</a>
-                        <a class="btn btn-link" href="/support">Support</a>
+                        <a class="btn btn-link" href="/policy">Politque de confidentialité</a>
+                        <a class="btn btn-link" href="/conditions">Termes & Conditions</a>
+                        {{-- <a class="btn btn-link" href="/support">Support</a> --}}
                     </div>
                 </div>
             </div>

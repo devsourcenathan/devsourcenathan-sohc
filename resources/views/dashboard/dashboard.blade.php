@@ -169,7 +169,14 @@
 
     @if (Auth::user()->type == 'client')
         @php
-            $reservations = Reservation::where("user_id", Auth::user()->id)->get();
+            // $reservations = Reservation::where("user_id", Auth::user()->id)->get();
+            $reservations_approved = Reservation::where(function ($query) {
+                    $query->where('user_id', Auth::user()->id)->where("state", "approved");
+            })->get();
+
+            $reservations = Reservation::where(function ($query) {
+                    $query->where('user_id', Auth::user()->id)->where("state", "!=", "approved");
+            })->get();
         @endphp
         <section class="section dashboard">
             <div class="row">
@@ -180,24 +187,46 @@
                 <div class="col-xxl-4 col-md-6">
                     <div class="card info-card sales-card">
 
-                    <div class="card-body">
-                        <h5 class="card-title">Reservations</h5>
+                        <div class="card-body">
+                            <h5 class="card-title">Mes Reservations</h5>
 
-                        <div class="d-flex align-items-center">
-                        <div
-                            class="card-icon rounded-circle d-flex align-items-center justify-content-center"
-                        >
-                            <i class="bi bi-cart"></i>
+                            <div class="d-flex align-items-center">
+                            <div
+                                class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                            >
+                                <i class="bi bi-cart"></i>
+                            </div>
+                            <div class="ps-3">
+                                <h6>{{count($reservations)}}</h6>
+                            </div>
+                            </div>
                         </div>
-                        <div class="ps-3">
-                            <h6>{{count($reservations)}}</h6>
-                        </div>
-                        </div>
-                    </div>
+
+                        
                     </div>
                 </div>
                 <!-- End Sales Card -->
+                <div class="col-xxl-4 col-md-6">
+                    <div class="card info-card sales-card">
 
+                        <div class="card-body">
+                            <h5 class="card-title">Mes Logements</h5>
+
+                            <div class="d-flex align-items-center">
+                            <div
+                                class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                            >
+                                <i class="bi bi-house"></i>
+                            </div>
+                            <div class="ps-3">
+                                <h6>{{count($reservations_approved)}}</h6>
+                            </div>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
                 <!-- Recent Sales -->
                 <div class="col-12">
                     <div class="card recent-sales overflow-auto">

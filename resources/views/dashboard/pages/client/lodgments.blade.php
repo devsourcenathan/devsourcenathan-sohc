@@ -8,17 +8,17 @@ use App\Models\Lodgment;
 @section('content')
 <div class="card">
     <div class="card-body">
-        <h5 class="card-title">Ma liste de reservations</h5>
+        <h5 class="card-title">Ma liste de logement</h5>
         <table class="table" id="table">
             <thead>
                 <tr>
                     <th>Titre du logment</th>
                     <th>Date</th>
-                    <th>Etat</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse ($reservations as $reservation)
+                @forelse ($reservations_approved as $reservation)
                     @php
                         
 
@@ -26,15 +26,9 @@ use App\Models\Lodgment;
                     @endphp
                 <tr>
                     <td>{{$lodgment->title}}</td>
-                    <td>{{$reservation->created_at}}</td>
+                    <td>{{$lodgment->created_at}}</td>
                     <td>
-                        @if ($reservation->state == "waiting")
-                            En attente
-                        @elseif($reservation->state == "rejected")
-                            Rejeté
-                        @else
-                            Approuvé
-                        @endif    
+                          
                     </td>
                 </tr>
                 @empty

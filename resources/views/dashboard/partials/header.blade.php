@@ -294,6 +294,13 @@ function collapsed($name){
       </li>
 
       <li class="nav-item">
+        <a class="nav-link collapsed" href="/dashboard/my_lodgments">
+          <i class="bi bi-journal-text"></i>
+          <span>Mes Logements</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
         <a class="nav-link collapsed" href="/dashboard/activities">
           <i class="bi bi-gear"></i>
           <span>Mon activite</span>
