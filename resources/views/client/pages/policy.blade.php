@@ -38,15 +38,13 @@
                             <br> « Service de  » désigne le service de commande, d’achat, de paiement (facilité) ou de réservation en ligne des différents produits et services proposés SOHC 
                             <br>« Réservation logement » désigne la commande, l’achat, le paiement ou la réservation d’un logement.
                             <br>
-                            <h6 class="section-title text-end text-primary">Quels types de données personnelles sont recueillis par SOHC ?</h6>
+                            <h6 class="section-title text-end text-primary">Pourquoi SOHC recueille-t-elle et utilise-t-elle vos données personnelles ?</h6>
                             <br>
                             Nous ne pouvons pas vous aider à réserver le logement de vos rêves sans que vous nous fournissiez certaines informations. C’est pourquoi nous vous demandons quelques renseignements lorsque vous utilisez nos services. Il s’agit d’informations générales telles que vos nom et prénom, vos coordonnées, vos informations de paiement etc…
                             Nous recueillons également les données provenant de l’ordinateur, du téléphone, de la tablette ou de tout autre appareil que vous utilisez pour accéder à nos services. Cela inclut votre adresse IP, le navigateur que vous utilisez et vos paramètres de langue. Dans certains cas, nous recevons aussi des données vous concernant de la part d’autres sources ou lorsque nous recueillons automatiquement d’autres données.
                             Il s’agit d’un aperçu général, mais si vous souhaitez en savoir plus sur les informations que nous recueillons, vous trouverez plus de renseignements ci-dessous.
                             En savoir plus sur les données personnelles que nous recueillons
-                            <br>
-                            <h6 class="section-title text-end text-primary">Pourquoi SOHC recueille-t-elle et utilise-t-elle vos données personnelles ?</h6>
-                            <br>
+                            
                             
                             Nous vous demandons vos informations personnelles pour une bonne raison : vous aider à organiser vos Réservations en ligne, et nous assurer que vous obtenez le meilleur service possible.
                             Nous utilisons également vos données personnelles pour vous informer de nos dernières réductions, de nos offres spéciales et d’autres produits ou services qui, selon nous, pourraient vous intéresser. Il existe d’autres utilisations possibles de vos données personnelles. Lisez la suite pour en savoir plus.
@@ -193,7 +191,7 @@
                             <br>
                             <h6 class="section-title text-end text-primary">Comment nous contacter ?</h6>
                             <br>
-                            Si vous avez la moindre question au sujet de ces Informations sur les cookies, envoyez un e-mail à l’adresse dataprotectionoffice@SOHC.
+                            Si vous avez la moindre question au sujet de ces Informations sur les cookies, envoyez un e-mail à l’adresse. <b class="text-primary">{{$config->contact_email}}</b>
                             Nos Informations sur les cookies sont susceptibles d’être modifiées de temps à autre. Si ces mises à jour sont importantes, particulièrement pertinentes pour vous ou qu’elles affectent les droits relatifs à la protection de vos données, nous vous contacterons pour vous en faire part. Nous vous recommandons cependant de consulter cette page régulièrement pour vous tenir au courant des dernières mises à jour (moins importantes ou moins pertinentes pour vous).
 
                     </p>

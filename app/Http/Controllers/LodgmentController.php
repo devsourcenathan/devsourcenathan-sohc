@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Activity;
 use App\Models\City;
+use App\Models\Config;
 use App\Models\Galery;
 use App\Models\Lodgment;
 use App\Models\LodgmentType;
+use App\Models\Payment;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -127,6 +129,7 @@ class LodgmentController extends Controller
         $lodgment = new Lodgment();
         $lodgment->title = $request->title;
         $lodgment->price = $request->price;
+        $lodgment->reservation_price = $request->reservation_price;
         $lodgment->description = $request->description;
         $lodgment->details = $request->details;
         $lodgment->pieces = $request->pieces;
@@ -168,5 +171,57 @@ class LodgmentController extends Controller
         $activity->save();
 
         return redirect('/lodgments');
+    }
+
+    public function buy($id)
+    {
+        $lodgment = Lodgment::find($id);
+
+        return view('dashboard.pages.client.payment.buy', compact('lodgment'));
+    }
+
+    public function confirm_buy(Request $request)
+    {
+
+
+        $payment = new Payment();
+
+        $lodgment = Lodgment::find($request->id_lodgment);
+
+        // $payment->price = $request->price;
+        $payment->month = $request->number;
+        $payment->price = $request->total_price;
+        $payment->user_id = Auth::user()->id;
+        $payment->lodgment_id = $request->id_lodgment;
+
+        $payment->save();
+
+        $payment = Payment::all()->last();
+
+        $activity = new Activity();
+        $activity->title = "Paiement d'un loyer ";
+        $activity->user_id = Auth::user()->id;
+        $activity->save();
+
+        $config = Config::all()->last();
+
+        return view('dashboard.pages.client.payment.confirm', compact('lodgment', 'config', 'payment'));
+    }
+
+    public function confirm(Request $request)
+    {
+        $payment = Payment::find($request->payment_id);
+
+        $payment->id_ref = $request->id_ref;
+
+        $payment->save();
+
+        $activity = new Activity();
+        $activity->title = "Confirmation d'un paiement (depot)";
+        $activity->user_id = Auth::user()->id;
+        $activity->save();
+
+
+        return view('dashboard.pages.client.payment.result');
     }
 }

@@ -37,6 +37,7 @@ Route::get('/lodgments', [LodgmentController::class, 'index'])->middleware('auth
 Route::get('/lodgments/create', [LodgmentController::class, 'create'])->middleware('auth');
 Route::get('/lodgments/details/{lodgment:slug}', [LodgmentController::class, 'show'])->middleware('auth');
 Route::get('/lodgments/details/publish/{id}', [LodgmentController::class, 'publish'])->middleware('auth');
+
 Route::get('/lodgments/details/unpublish/{lodgment:slug}', [LodgmentController::class, 'unpublish'])->middleware('auth');
 Route::get('/lodgments/details/reject/{lodgment:slug}', [LodgmentController::class, 'reject'])->middleware('auth');
 
@@ -57,7 +58,9 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
 
     Route::get('/reservations', [CustomerController::class, 'reservations']);
     Route::get('/my_lodgments', [CustomerController::class, 'my_lodgments']);
-
+    Route::get('/lodgments/buy/{id}', [LodgmentController::class, 'buy'])->middleware('auth');
+    Route::post('/lodgments/buy', [LodgmentController::class, 'confirm_buy'])->middleware('auth');
+    Route::post('/lodgments/confirm', [LodgmentController::class, 'confirm'])->middleware('auth');
 
 
     Route::get('/activities', [CustomerController::class, 'activities']);

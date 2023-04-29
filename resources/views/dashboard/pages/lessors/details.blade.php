@@ -48,15 +48,15 @@
                 <tr>
                     <td>{{$request->title}}</td>
                     <td>
-                      @if($lodgment->state === 4)
+                      @if($request->state === 4)
                           Rejeté
-                      @elseif($lodgment->state === 3)
+                      @elseif($request->state === 3)
                           En attente
                       @endif
                     </td>
                     <td>
 
-                        <a href="/dashboard/lessors/details/{{$lodgment->id}}" class="badge rounded-pill bg-info cursor-pointer" style="cursor: pointer;">Afficher</a>
+                        <a href="/dashboard/lessors/details/{{$request->id}}" class="badge rounded-pill bg-info cursor-pointer" style="cursor: pointer;">Afficher</a>
                     </td>
                 </tr>
                 @empty

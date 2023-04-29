@@ -18,6 +18,7 @@ class CreateLodgmentsTable extends Migration
             $table->string('title');
             $table->string('slug')->default('');
             $table->integer('price');
+            $table->integer('reservation_price');
             $table->integer('stars')->default(1);
             $table->string('description');
             $table->text('details');

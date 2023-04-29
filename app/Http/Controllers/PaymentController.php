@@ -30,11 +30,11 @@ class PaymentController extends Controller
         //     'description' => "Lodgment reservation to sohc.cm",
         //     'callback' => "http://127.0.0.1:8000/lodgments"
         // ]);
-
+        $lodgment = Lodgment::find($request->id_lodgment);
 
         $reservation = new Reservation();
         $reservation->lodgment_id = $request->id_lodgment;
-        $reservation->price = 5000;
+        $reservation->price = $lodgment->reservation_price;
         $reservation->phone = $request->phone;
         $reservation->message = $request->message;
         $reservation->date = $request->date;
@@ -47,7 +47,7 @@ class PaymentController extends Controller
         $activity->user_id = Auth::user()->id;
         $activity->save();
 
-        $lodgment = Lodgment::find($request->id_lodgment);
+        // $lodgment = Lodgment::find($request->id_lodgment);
 
         $user = User::find($reservation->user_id);
         $details = [
@@ -73,7 +73,7 @@ class PaymentController extends Controller
         $activity->title = "Confirmation d'une reservation";
         $activity->user_id = Auth::user()->id;
         $activity->save();
-        return redirect('/reservations');
+        return redirect('/dashboard/reservations');
     }
 
     public function confirmed($id)

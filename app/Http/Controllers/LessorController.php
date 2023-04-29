@@ -63,6 +63,7 @@ class LessorController extends Controller
         $lodgment->price = $request->price;
         $lodgment->description = $request->description;
         $lodgment->details = $request->details;
+        $lodgment->stars = $request->stars;
         $lodgment->pieces = $request->pieces;
         $lodgment->location = $request->location;
         $lodgment->town = $request->town;

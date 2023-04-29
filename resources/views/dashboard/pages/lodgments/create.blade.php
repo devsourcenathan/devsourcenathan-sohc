@@ -13,9 +13,14 @@
           <input type="text" class="form-control" id="title" name="title" required>
         </div>
 
-        <div class="col-md-6">
-          <label for="price" class="form-label">Prix</label>
+        <div class="col-md-3">
+          <label for="price" class="form-label">Prix du logement</label>
           <input type="number" min="0" class="form-control" id="price" name="price" required>
+        </div>
+
+        <div class="col-md-3">
+          <label for="reservation_price" class="form-label">Prix de reservation</label>
+          <input type="number" min="0" class="form-control" value="5000" id="reservation_price" name="reservation_price" required>
         </div>
 
         <div class="col-md-6">

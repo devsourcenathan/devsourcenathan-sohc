@@ -58,10 +58,15 @@
           </div>
 
 
-        <div class="col-md-6">
+        <div class="col-md-3">
           <label for="pieces" class="form-label">Nombre de pieces</label>
           <input type="number" min="1" class="form-control" id="pieces" name="pieces" required>
-      </div>          
+        </div>          
+
+        <div class="col-md-3">
+          <label for="stars" class="form-label">Etoiles</label>
+          <input type="number" min="1" class="form-control" id="stars" max="5" name="stars" required>
+        </div> 
 
 
         <div class="col-md-6">
@@ -71,7 +76,7 @@
 
         <div class="col-md-12">
           <label for="details" class="form-label">Details</label>
-          <textarea name="details" class="form-control" id="details" cols="30" rows="10">
+          <textarea name="details" class="form-control" id="details" cols="30" rows="10" required>
             
           </textarea>
           

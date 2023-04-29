@@ -105,6 +105,7 @@ class HomeController extends Controller
 
     public function policy()
     {
-        return view('client.pages.policy');
+        $config = Config::all()->last();
+        return view('client.pages.policy', compact('config'));
     }
 }
