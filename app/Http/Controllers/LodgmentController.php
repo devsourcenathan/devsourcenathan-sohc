@@ -224,4 +224,37 @@ class LodgmentController extends Controller
 
         return view('dashboard.pages.client.payment.result');
     }
+
+    public function payments()
+    {
+        $payments = Payment::all();
+
+        return view('dashboard.pages.payments.index', compact('payments'));
+    }
+
+    public function reject_payment($id)
+    {
+        $payment = Payment::find($id);
+
+        $payment->state = 'rejected';
+
+        $payment->save();
+
+        $payments = Payment::all();
+
+        return view('dashboard.pages.payments.index', compact('payments'));
+    }
+
+    public function validate_payment($id)
+    {
+        $payment = Payment::find($id);
+
+        $payment->state = 'approved';
+
+        $payment->save();
+
+        $payments = Payment::all();
+
+        return view('dashboard.pages.payments.index', compact('payments'));
+    }
 }

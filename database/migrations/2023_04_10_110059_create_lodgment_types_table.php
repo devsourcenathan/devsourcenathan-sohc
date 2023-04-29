@@ -16,6 +16,7 @@ class CreateLodgmentTypesTable extends Migration
         Schema::create('lodgment_types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('state')->default('active');
             $table->timestamps();
         });
     }

@@ -175,7 +175,7 @@ function collapsed($name){
       @if (Auth::user()->type == 'admin')
         <li class="nav-item">
           <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-            <i class="bi bi-menu-button-wide"></i><span>Logements</span><i class="bi bi-chevron-down ms-auto"></i>
+            <i class="bi bi-house"></i><span>Logements</span><i class="bi bi-chevron-down ms-auto"></i>
           </a>
           <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
             <li>
@@ -196,6 +196,13 @@ function collapsed($name){
           <a class="nav-link collapsed" href="/reservations">
             <i class="bi bi-journal-text"></i>
             <span>Reservations</span>
+          </a>
+        </li><!-- End Forms Nav -->
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="/payments">
+            <i class="bi bi-cash"></i>
+            <span>Paiements</span>
           </a>
         </li><!-- End Forms Nav -->
 

@@ -80,6 +80,9 @@ Route::get('/reservations', [LodgmentController::class, 'reservations']);
 Route::get('/reservations/confirm/{id}', [PaymentController::class, 'confirmed']);
 Route::get('/reservations/reject/{id}', [PaymentController::class, 'reject']);
 
+Route::get('/payments/validate/{id}', [LodgmentController::class, 'validate_payment']);
+Route::get('/payments/reject/{id}', [LodgmentController::class, 'reject_payment']);
+Route::get('/payments', [LodgmentController::class, 'payments']);
 // Params routes
 Route::get('/cities', [ParamController::class, 'cities'])->middleware('auth');
 Route::get('/types', [ParamController::class, 'types'])->middleware('auth');
