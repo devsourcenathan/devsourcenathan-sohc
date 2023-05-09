@@ -53,7 +53,13 @@
                 @endphp
                 <tr>
                     <td>{{$lodgment->title}}</td>
-                    <td></td>
+                    <td>
+                      @if ($lodgment->state == 3 || $lodgment->state == 0 || $lodgment->state == 4)
+                        Pas en ligne
+                    @elseif($lodgment->state == 1)
+                        En ligne
+                    @endif
+                    </td>
                     <td>
 
                         <a href="/dashboard/customers/details/{{$customer->id}}" class="badge rounded-pill bg-info cursor-pointer" style="cursor: pointer;">Afficher</a>

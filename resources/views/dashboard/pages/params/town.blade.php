@@ -19,6 +19,11 @@
                         {{ $town->name}}
                     </td>
                     <td>
+                        @if ($town->state == "active")
+                            <a href="/dashboard/town/hide_town/{{$town->id}}" class="badge rounded-pill bg-warning cursor-pointer" style="cursor: pointer;">Masquer</a>
+                        @else
+                            <a href="/dashboard/town/show_town/{{$town->id}}" class="badge rounded-pill bg-success cursor-pointer" style="cursor: pointer;">Afficher</a>
+                        @endif
                     </td>
                     @empty
                     <td colspan="2">

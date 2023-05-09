@@ -19,13 +19,21 @@
                         {{ $city->name}}
                     </td>
                     <td>
+                        @if ($city->state == "active")
+                            <a href="/dashboard/city/hide_city/{{$city->id}}" class="badge rounded-pill bg-warning cursor-pointer" style="cursor: pointer;">Masquer</a>
+                        @else
+                            <a href="/dashboard/city/show_city/{{$city->id}}" class="badge rounded-pill bg-success cursor-pointer" style="cursor: pointer;">Afficher</a>
+                        @endif
                     </td>
-                    @empty
-                    <td colspan="2">
-                        Pas de ville pour le moment !
-                    </td>
-                </tr>
-                    @endforelse
+                    
+            </tr>
+            @empty
+            <tr>
+                <td colspan="2">
+                    Pas de ville pour le moment !
+                </td>
+            </tr>
+                @endforelse
                     
 
         </tbody>

@@ -61,9 +61,9 @@ class HomeController extends Controller
 
     public function lodgment()
     {
-        $types = LodgmentType::all();
-        $cities = City::all();
-        $towns = Town::all();
+        $types = LodgmentType::where('state', 'active')->get();
+        $cities = City::where('state', 'active')->get();
+        $towns = Town::where('state', 'active')->get();
         $lodgments = Lodgment::where('state', 1)->get();
         return view('client.pages.lodgment', compact('types', 'cities', 'towns', 'lodgments'));
     }
@@ -72,9 +72,9 @@ class HomeController extends Controller
     public function search(Request $request)
     {
 
-        $types = LodgmentType::all();
-        $cities = City::all();
-        $towns = Town::all();
+        $types = LodgmentType::alwhere('state', 'active')->getl();
+        $cities = City::where('state', 'active')->get();
+        $towns = Town::where('state', 'active')->get();
 
         $lodgments = Lodgment::where(function ($query) use ($request) {
             $query->where('state', 1)->orWhere('type', $request->type)->orWhere('location', $request->location)->orWhere('town', $request->town)->orWhere('stars', $request->stars);

@@ -16,7 +16,13 @@
             @forelse ($types as $type)
             <tr>
                <td>{{$type->name}}</td>
-               <td></td>
+               <td>
+                @if ($type->state == "active")
+                    <a href="/dashboard/type/hide_type/{{$type->id}}" class="badge rounded-pill bg-warning cursor-pointer" style="cursor: pointer;">Masquer</a>
+                @else
+                    <a href="/dashboard/type/show_type/{{$type->id}}" class="badge rounded-pill bg-success cursor-pointer" style="cursor: pointer;">Afficher</a>
+                @endif
+            </td>
            @empty
                  <td>Pas de type pour le moment !</td>
            </tr>

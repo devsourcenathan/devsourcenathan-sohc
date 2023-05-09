@@ -35,8 +35,8 @@ class LodgmentController extends Controller
 
     public function create()
     {
-        $types = LodgmentType::all();
-        $cities = City::all();
+        $types = LodgmentType::where('state', 'active')->get();
+        $cities = City::where('state', 'active')->get();
         return view('dashboard.pages.lodgments.create', compact('types', 'cities'));
     }
 

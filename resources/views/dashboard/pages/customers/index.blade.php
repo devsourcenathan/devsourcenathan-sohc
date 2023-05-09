@@ -9,7 +9,7 @@
                 <tr>
                     <th>Nom</th>
                     <th>Email</th>
-                    <th>Etat</th>
+                    {{-- <th>Etat</th> --}}
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -18,7 +18,7 @@
                 <tr>
                     <td>{{$customer->name}}</td>
                     <td>{{$customer->email}}</td>
-                    <td></td>
+                    {{-- <td></td> --}}
                     <td>
 
                         <a href="/dashboard/customers/details/{{$customer->id}}" class="badge rounded-pill bg-info cursor-pointer" style="cursor: pointer;">Afficher</a>

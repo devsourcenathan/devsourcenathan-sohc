@@ -68,6 +68,16 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
 
 
     Route::get('/profile', [UserController::class, 'profile']);
+
+
+    Route::get('/city/hide_city/{id}', [ParamController::class, 'hide_city']);
+    Route::get('/city/show_city/{id}', [ParamController::class, 'show_city']);
+
+    Route::get('/town/hide_town/{id}', [ParamController::class, 'hide_town']);
+    Route::get('/town/show_town/{id}', [ParamController::class, 'show_town']);
+
+    Route::get('/type/hide_type/{id}', [ParamController::class, 'hide_type']);
+    Route::get('/type/show_type/{id}', [ParamController::class, 'show_type']);
 });
 
 

@@ -9,7 +9,7 @@
                 <tr>
                     <th>Nom</th>
                     <th>Email</th>
-                    <th>Etat</th>
+                    {{-- <th>Etat</th> --}}
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -18,7 +18,7 @@
                 <tr>
                     <td>{{$user->name}}</td>
                     <td>{{$user->email}}</td>
-                    <td></td>
+                    {{-- <td></td> --}}
                     <td>
 
                         <a href="/dashboard/users/details/{{$user->id}}" class="badge rounded-pill bg-info cursor-pointer" style="cursor: pointer;">Afficher</a>
