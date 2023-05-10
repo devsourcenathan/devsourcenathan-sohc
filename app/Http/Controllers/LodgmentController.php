@@ -40,6 +40,14 @@ class LodgmentController extends Controller
         return view('dashboard.pages.lodgments.create', compact('types', 'cities'));
     }
 
+    public function update(Lodgment $lodgment)
+    {
+        $types = LodgmentType::where('state', 'active')->get();
+        $cities = City::where('state', 'active')->get();
+
+        return view('dashboard.pages.lodgments.update', compact('lodgment', 'types', 'cities'));
+    }
+
     public function show(Lodgment $lodgment)
     {
         $images = Galery::where("lodgment_id", $lodgment->id)->get();
@@ -167,6 +175,56 @@ class LodgmentController extends Controller
 
         $activity = new Activity();
         $activity->title = "Enregistrement d'un logement";
+        $activity->user_id = Auth::user()->id;
+        $activity->save();
+
+        return redirect('/lodgments');
+    }
+
+    public function updateLodgment(Request $request)
+    {
+        $lodgment = Lodgment::find($request->id_lodgment);
+        $lodgment->title = $request->title;
+        $lodgment->price = $request->price;
+        $lodgment->reservation_price = $request->reservation_price;
+        $lodgment->description = $request->description;
+        $lodgment->details = $request->details;
+        $lodgment->pieces = $request->pieces;
+        $lodgment->location = $request->location;
+        $lodgment->type = $request->type;
+        $lodgment->description = $request->description;
+        $lodgment->user_id = $request->user_id;
+        $lodgment->slug = preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $request->title));
+        $lodgment->state = 1;
+        $lodgment->save();
+
+        $last = Lodgment::latest()->first();
+
+        // $images = $request->file('images');
+        $path = public_path('/storage/galery');
+
+        if ($request->images != null) {
+
+            foreach ($request->file('images') as $image) {
+
+                $galery = new Galery();
+
+                $filename = random_int(100000, 999999) . time() . '.' . $image->extension();
+
+                $img = Image::make($image->path());
+                $name = $img->resize(400, 400, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save($path . '/' . $filename);
+
+                $galery->lodgment_id = $last->id;
+                $galery->image_path = 'galery/' . $name->basename;
+
+                $galery->save();
+            }
+        }
+
+        $activity = new Activity();
+        $activity->title = "Modification d'un logement";
         $activity->user_id = Auth::user()->id;
         $activity->save();
 

@@ -44,6 +44,7 @@
                     @endif
                     
                     <a href="lodgments/details/{{$lodgment->slug}}" class="badge rounded-pill bg-info cursor-pointer" style="cursor: pointer;">Afficher</a>
+                    <a href="lodgments/update/{{$lodgment->slug}}" class="badge rounded-pill bg-primary cursor-pointer" style="cursor: pointer;">Modifier</a>
                 </td> 
             </tr>
             @empty

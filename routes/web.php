@@ -35,6 +35,7 @@ Route::post('/configs/store', [ConfigController::class, 'store'])->middleware('a
 // Lodgment routes
 Route::get('/lodgments', [LodgmentController::class, 'index'])->middleware('auth');
 Route::get('/lodgments/create', [LodgmentController::class, 'create'])->middleware('auth');
+Route::get('/lodgments/update/{lodgment:slug}', [LodgmentController::class, 'update'])->middleware('auth');
 Route::get('/lodgments/details/{lodgment:slug}', [LodgmentController::class, 'show'])->middleware('auth');
 Route::get('/lodgments/details/publish/{id}', [LodgmentController::class, 'publish'])->middleware('auth');
 
@@ -82,6 +83,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
 
 
 Route::post('/lodgments/store', [LodgmentController::class, 'store']);
+Route::post('/lodgments/update', [LodgmentController::class, 'updateLodgment']);
 
 Route::get('/requests', [LodgmentController::class, 'requests']);
 

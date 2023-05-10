@@ -75,6 +75,11 @@
         </div>
 
         <div class="col-md-12">
+          <label for="images" class="form-label">Galerie d'images</label>
+          <input type="file" class="form-control" id="images" name="images[]" accept="image/*" multiple required>
+      </div>
+
+        <div class="col-md-12">
           <label for="details" class="form-label">Details</label>
           <textarea name="details" class="form-control" id="details" cols="30" rows="10" required>
             
