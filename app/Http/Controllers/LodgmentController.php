@@ -10,8 +10,10 @@ use App\Models\Lodgment;
 use App\Models\LodgmentType;
 use App\Models\Payment;
 use App\Models\Reservation;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Image;
 
 class LodgmentController extends Controller
@@ -91,6 +93,7 @@ class LodgmentController extends Controller
         $activity->title = "Rejet d'une demande de logement";
         $activity->user_id = Auth::user()->id;
         $activity->save();
+
 
         return view('dashboard.pages.lodgments.details', compact('lodgment'));
     }
@@ -198,8 +201,6 @@ class LodgmentController extends Controller
         $lodgment->state = 1;
         $lodgment->save();
 
-        $last = Lodgment::latest()->first();
-
         // $images = $request->file('images');
         $path = public_path('/storage/galery');
 
@@ -216,7 +217,7 @@ class LodgmentController extends Controller
                     $constraint->aspectRatio();
                 })->save($path . '/' . $filename);
 
-                $galery->lodgment_id = $last->id;
+                $galery->lodgment_id = $request->id_lodgment;
                 $galery->image_path = 'galery/' . $name->basename;
 
                 $galery->save();
@@ -261,6 +262,14 @@ class LodgmentController extends Controller
         $activity->user_id = Auth::user()->id;
         $activity->save();
 
+        $user = User::find($payment->user_id);
+        $details = [
+            'title' => 'Mail from Online Housing Company',
+            'body' => 'Votre paiement a été enregistré'
+        ];
+
+        Mail::to($user->email)->send(new \App\Mail\NotifyMail($details));
+
         $config = Config::all()->last();
 
         return view('dashboard.pages.client.payment.confirm', compact('lodgment', 'config', 'payment'));
@@ -279,6 +288,13 @@ class LodgmentController extends Controller
         $activity->user_id = Auth::user()->id;
         $activity->save();
 
+        $user = User::find($payment->user_id);
+        $details = [
+            'title' => 'Mail from Online Housing Company',
+            'body' => 'Votre paiement a été confirmé'
+        ];
+
+        Mail::to($user->email)->send(new \App\Mail\NotifyMail($details));
 
         return view('dashboard.pages.client.payment.result');
     }
@@ -300,6 +316,14 @@ class LodgmentController extends Controller
 
         $payments = Payment::all();
 
+        $user = User::find($payment->user_id);
+        $details = [
+            'title' => 'Mail from Housing Online Company',
+            'body' => 'Votre payment a été rejeté'
+        ];
+
+        Mail::to($user->email)->send(new \App\Mail\NotifyMail($details));
+
         return view('dashboard.pages.payments.index', compact('payments'));
     }
 
@@ -310,6 +334,16 @@ class LodgmentController extends Controller
         $payment->state = 'approved';
 
         $payment->save();
+
+
+        $user = User::find($payment->user_id);
+        $details = [
+            'title' => 'Mail from Housing Online Company',
+            'body' => 'Votre payment a été approuvé'
+        ];
+
+
+        Mail::to($user->email)->send(new \App\Mail\NotifyMail($details));
 
         $payments = Payment::all();
 

@@ -15,21 +15,6 @@ class PaymentController extends Controller
 {
     public function initialize(Request $request)
     {
-
-
-        // $response = Http::withHeaders([
-        //     'Accept' => 'application/json',
-        //     'Authorization' => 'b.KyH8x667RmILBmQ8xDWy2alZHwPPIuVA'
-        // ])->post("https://api.notchpay.co/payments/initialize", [
-        //     'email' => Auth::user()->email,
-        //     'phone' => $request->phone,
-        //     'name' => Auth::user()->name,
-        //     'customer_id' => Auth::user()->id,
-        //     'amount' => $request->amount,
-        //     'currency' => "FCFA",
-        //     'description' => "Lodgment reservation to sohc.cm",
-        //     'callback' => "http://127.0.0.1:8000/lodgments"
-        // ]);
         $lodgment = Lodgment::find($request->id_lodgment);
 
         $reservation = new Reservation();
@@ -51,7 +36,7 @@ class PaymentController extends Controller
 
         $user = User::find($reservation->user_id);
         $details = [
-            'title' => 'Mail from House Online Company',
+            'title' => 'Mail from Online Housing Company',
             'body' => 'Votre demande de reservation a été enregistré'
         ];
 
@@ -73,6 +58,8 @@ class PaymentController extends Controller
         $activity->title = "Confirmation d'une reservation";
         $activity->user_id = Auth::user()->id;
         $activity->save();
+
+
         return redirect('/dashboard/reservations');
     }
 
@@ -86,8 +73,8 @@ class PaymentController extends Controller
 
         $user = User::find($reservation->user_id);
         $details = [
-            'title' => 'Mail from House Online Company',
-            'body' => 'Votre demande de reservation a été rejeté'
+            'title' => 'Mail from Online Housing Company',
+            'body' => 'Votre demande de reservation a été approuvé'
         ];
 
         Mail::to($user->email)->send(new \App\Mail\NotifyMail($details));
@@ -104,8 +91,8 @@ class PaymentController extends Controller
 
         $user = User::find($reservation->user_id);
         $details = [
-            'title' => 'Mail from House Online Company',
-            'body' => 'Votre demande de reservation a été approuvé'
+            'title' => 'Mail from Online Housing Company',
+            'body' => 'Votre demande de reservation a été rejeté'
         ];
 
         Mail::to($user->email)->send(new \App\Mail\NotifyMail($details));

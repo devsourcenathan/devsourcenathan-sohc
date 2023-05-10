@@ -72,7 +72,7 @@ class HomeController extends Controller
     public function search(Request $request)
     {
 
-        $types = LodgmentType::alwhere('state', 'active')->getl();
+        $types = LodgmentType::where('state', 'active')->get();
         $cities = City::where('state', 'active')->get();
         $towns = Town::where('state', 'active')->get();
 

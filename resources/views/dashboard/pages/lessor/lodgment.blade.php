@@ -39,9 +39,12 @@
             </tr>
             @empty
                 <tr>
-                    <td colspan="7">Pas de demandes !</td>
+                    <td colspan="7">
+                        Pas de logement ! <br>
+                        <a href="/lessor/propose"  class="btn btn-primary">Faire une demande</a>
+                    </td>
                 </tr>
-            @endforelse ($lodgments as $lodgment)
+            @endforelse
                 
         </tbody>
     </table>

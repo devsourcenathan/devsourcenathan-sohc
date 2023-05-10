@@ -15,7 +15,7 @@ class ConfigController extends Controller
     }
     public function index()
     {
-        $configs = Config::all()->last();
+        $configs = Config::find(1);
         return view('dashboard.pages.configs.index', compact('configs'));
     }
 

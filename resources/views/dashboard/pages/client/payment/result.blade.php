@@ -8,7 +8,7 @@
                 <div class="card info-card sales-card bg-info">
 
                 <div class="card-body">
-                    <h5 class="card-title">Votre paiement a été confirmé</h5>
+                    <h5 class="card-title">Votre paiement a été effectué</h5>
 
                     <div class="d-flex align-items-center">
                     

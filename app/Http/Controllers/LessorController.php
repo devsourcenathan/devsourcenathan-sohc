@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Activity;
 use App\Models\City;
+use App\Models\Galery;
 use App\Models\Lodgment;
 use App\Models\LodgmentType;
 use App\Models\Town;
@@ -31,9 +32,9 @@ class LessorController extends Controller
 
     public function propose()
     {
-        $types = LodgmentType::all();
-        $cities = City::all();
-        $towns = Town::all();
+        $types = LodgmentType::where('state', 'active')->get();
+        $cities = City::where('state', 'active')->get();
+        $towns = Town::where('state', 'active')->get();
         return view('dashboard.pages.lessor.propose', compact('types', 'cities', 'towns'));
     }
     public function store(Request $request)
@@ -74,6 +75,32 @@ class LessorController extends Controller
         $lodgment->state = 3;
 
         $lodgment->save();
+
+        $last = Lodgment::latest()->first();
+
+
+        $path = public_path('/storage/galery');
+
+        if ($request->images != null) {
+
+            foreach ($request->file('images') as $image) {
+
+                $galery = new Galery();
+
+                $filename = random_int(100000, 999999) . time() . '.' . $image->extension();
+
+                $img = Image::make($image->path());
+                $name = $img->resize(400, 400, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save($path . '/' . $filename);
+
+                $galery->lodgment_id = $last->id;
+                $galery->image_path = 'galery/' . $name->basename;
+
+                $galery->save();
+            }
+        }
+
 
         $activity = new Activity();
         $activity->title = "Envoie d'une demande de logement";
