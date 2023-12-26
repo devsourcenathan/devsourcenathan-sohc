@@ -123,10 +123,12 @@
             <div class="row g-4">
 
                 @foreach ($lodgments as $lodgment)
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s"
+                        style="height: 480px;margin-top: 15px">
                         <div class="room-item shadow rounded overflow-hidden">
                             <div class="position-relative">
-                                <img class="img-fluid" src="{{ Storage::url($lodgment->img_path) }}" alt="" />
+                                <img class="img-fluid" src="/site/public{{ Storage::url($lodgment->img_path) }}"
+                                    alt="" style="height: 200px; object-fit: cover;" />
                                 <small
                                     class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">{{ $lodgment->price }}
                                     F/Mois</small>
