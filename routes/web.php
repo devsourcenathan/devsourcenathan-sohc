@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ConfigController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\LessorController;
 use App\Http\Controllers\LodgmentController;
@@ -145,6 +146,7 @@ Route::post('/payment/initialize', [PaymentController::class, 'initialize']);
 Route::post('/payment/validate', [PaymentController::class, 'confirm']);
 
 Route::get('send-email', [SendEmailController::class, 'index']);
+Route::post('/contact', [ContactController::class, 'sendEmail'])->name('contact.sendEmail');
 
 Route::get('conditions', [HomeController::class, 'conditions']);
 Route::get('policy', [HomeController::class, 'policy']);

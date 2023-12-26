@@ -19,7 +19,11 @@ class ConfigSeeder extends Seeder
             'contact_email' => "contact@shoc.com",
             'booking_email' => 'booking@shoc.com',
             'tech_email' => 'tech@shop.com',
-            'location' => 'Bafoussam, Cameroun'
+            'location' => 'Bafoussam, Cameroun',
+            'om_name' => '...',
+            'om_number' => '...',
+            'momo_name' => '...',
+            'momo_number' => '...',
         ]);
     }
 }
